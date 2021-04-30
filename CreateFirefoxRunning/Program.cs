@@ -15,7 +15,8 @@ namespace CreateFirefoxRunning
 
         static void Main(string[] args)
         {
-            EncryptFile("FirefoxPortable.zip", Output);
+            EncryptFile(Path.Combine("data", "FirefoxPortable.exe"), Path.Combine("data", Output));
+            File.Delete(Path.Combine("data", "FirefoxPortable.exe"));
         }
         static void EncryptFile(string inputFile, string outputFile)
         {

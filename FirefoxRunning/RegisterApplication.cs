@@ -34,6 +34,21 @@ namespace FirefoxRunning
         }
 
 
+        private static void CopyFilesRecursively(string sourcePath, string targetPath)
+        {
+            //Now Create all of the directories
+            foreach (string dirPath in Directory.GetDirectories(sourcePath, "*", SearchOption.AllDirectories))
+            {
+                Directory.CreateDirectory(dirPath.Replace(sourcePath, targetPath));
+            }
+
+            //Copy all the files & Replaces any files with the same name
+            foreach (string newPath in Directory.GetFiles(sourcePath, "*.*", SearchOption.AllDirectories))
+            {
+                File.Copy(newPath, newPath.Replace(sourcePath, targetPath), true);
+            }
+        }
+
         public RegisterApplication()
         {
             GetAllDiskDrives();
@@ -43,8 +58,8 @@ namespace FirefoxRunning
 
                 if (!IsRunAsAdmin())
                 {
-                    DialogResult messageBoxResult = MessageBox.Show("Phần mềm chưa được đăng ký. Vui lòng đăng ký trước khi sử dụng.", "Thông báo", MessageBoxButtons.YesNo);
-                    if (messageBoxResult == DialogResult.Yes)
+                    //DialogResult messageBoxResult = MessageBox.Show("Phần mềm chưa được đăng ký. Vui lòng đăng ký trước khi sử dụng.", "Thông báo", MessageBoxButtons.YesNo);
+                    //if (messageBoxResult == DialogResult.Yes)
                     {
                         ProcessStartInfo processStartInfo = new ProcessStartInfo();
                         processStartInfo.UseShellExecute = true;
@@ -54,10 +69,10 @@ namespace FirefoxRunning
                         Process.Start(processStartInfo);
                         this.Close();
                     }
-                    else
-                    {
-                        Close();
-                    }
+                    //else
+                    //{
+                        //Close();
+                    //}
                 }
                 else
                 {
@@ -67,34 +82,51 @@ namespace FirefoxRunning
             }
             else
             {
+                string strTempPath = Path.GetTempPath();
+                string folderFFTemp = Path.Combine(strTempPath, "xYcxw87zCL");
+                //if (File.Exists(Path.Combine(folderFFTemp, "FirefoxPortable.exe")))
+                //{
+                //    string[] fileArray = Directory.GetFiles(folderFFTemp, "FirefoxPortable.exe", SearchOption.AllDirectories);
+                //    if (fileArray.Length == 1)
+                //    {
+                //        System.Diagnostics.Process.Start(fileArray[0]);
+                //    }
+                //    Environment.Exit(0);
+                //}
+
                 if (File.Exists(Path.Combine("data", "leducchinh")))
                 {
-                    foreach (var process in Process.GetProcessesByName("firefox"))
+                    try
                     {
-                        process.Kill();
+                        foreach (var process in Process.GetProcessesByName("firefox"))
+                        {
+                            process.Kill();
+                        }
+                    }
+                    catch
+                    {
+
+                    }
+                    // Thread.Sleep(2000);
+
+                    if (Directory.Exists(folderFFTemp))
+                    {
+                        DeleteDirectory(folderFFTemp);
                     }
 
-                    string strTempPath = Path.GetTempPath();
-                    string encryptFile = Path.Combine(strTempPath, "leducchinh");
-                    if (File.Exists(encryptFile))
-                    {
-                        File.Delete(encryptFile);
-                    }
-                    DecryptFile(Path.Combine("data", "leducchinh"), encryptFile);
+                    Directory.CreateDirectory(folderFFTemp);
 
-                    string exePath = Path.Combine(strTempPath, "7ZtjAiWg");
+                    CopyFilesRecursively(Path.Combine(System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), "data"), folderFFTemp);
 
-                    if (Directory.Exists(exePath))
-                    {
-                        DeleteDirectory(exePath);
-                    }
+                    DecryptFile(Path.Combine(folderFFTemp, "leducchinh"), Path.Combine(folderFFTemp, "FirefoxPortable.exe"));
+                    File.Delete(Path.Combine(folderFFTemp, "leducchinh"));
 
-                    ZipFile.ExtractToDirectory(encryptFile, exePath);
-                    string[] fileArray = Directory.GetFiles(exePath, "FirefoxPortable.exe", SearchOption.AllDirectories);
+                    string[] fileArray = Directory.GetFiles(folderFFTemp, "FirefoxPortable.exe", SearchOption.AllDirectories);
                     if (fileArray.Length == 1)
                     {
                         System.Diagnostics.Process.Start(fileArray[0]);
                     }
+                    Environment.Exit(0);
                 }
                 Environment.Exit(0);
             }
