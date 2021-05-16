@@ -71,7 +71,7 @@ namespace FirefoxRunning
                     }
                     //else
                     //{
-                        //Close();
+                    //Close();
                     //}
                 }
                 else
@@ -107,7 +107,17 @@ namespace FirefoxRunning
                     {
 
                     }
-                    // Thread.Sleep(2000);
+                    try
+                    {
+                        foreach (var process in Process.GetProcessesByName("FirefoxPortable"))
+                        {
+                            process.Kill();
+                        }
+                    }
+                    catch
+                    {
+
+                    }
 
                     if (Directory.Exists(folderFFTemp))
                     {
@@ -134,21 +144,28 @@ namespace FirefoxRunning
 
         private static void DeleteDirectory(string target_dir)
         {
-            string[] files = Directory.GetFiles(target_dir);
-            string[] dirs = Directory.GetDirectories(target_dir);
-
-            foreach (string file in files)
+            try
             {
-                File.SetAttributes(file, FileAttributes.Normal);
-                File.Delete(file);
-            }
+                string[] files = Directory.GetFiles(target_dir);
+                string[] dirs = Directory.GetDirectories(target_dir);
 
-            foreach (string dir in dirs)
+                foreach (string file in files)
+                {
+                    File.SetAttributes(file, FileAttributes.Normal);
+                    File.Delete(file);
+                }
+
+                foreach (string dir in dirs)
+                {
+                    DeleteDirectory(dir);
+                }
+
+                Directory.Delete(target_dir, false);
+            }
+            catch
             {
-                DeleteDirectory(dir);
-            }
 
-            Directory.Delete(target_dir, false);
+            }
         }
 
         private void DecryptFile(string inputFile, string outputFile)
