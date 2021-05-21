@@ -34,20 +34,19 @@ namespace FirefoxRunning
 
         private static void GetAllDiskDrives()
         {
-            var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive");
+            ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_PhysicalMedia");
 
             foreach (ManagementObject wmi_HD in searcher.Get())
             {
-                HardDrive hd = new HardDrive();
-                hd.Model = wmi_HD["Model"].ToString();
-                hd.InterfaceType = wmi_HD["InterfaceType"].ToString();
-                hd.Caption = wmi_HD["Caption"].ToString();
+                // get the hardware serial no.
+                if (wmi_HD["SerialNumber"] != null)
+                {
+                    HardDrive hd = new HardDrive();
+                    hd.SerialNo = wmi_HD["SerialNumber"].ToString();
+                    hardDrives.Add(hd);
+                }
 
-                hd.SerialNo = wmi_HD.GetPropertyValue("SerialNumber").ToString();//get the serailNumber of diskdrive
-
-                hardDrives.Add(hd);
             }
-
         }
     }
 }
