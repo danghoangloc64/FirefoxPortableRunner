@@ -58,8 +58,6 @@ namespace FirefoxRunning
 
                 if (!IsRunAsAdmin())
                 {
-                    //DialogResult messageBoxResult = MessageBox.Show("Phần mềm chưa được đăng ký. Vui lòng đăng ký trước khi sử dụng.", "Thông báo", MessageBoxButtons.YesNo);
-                    //if (messageBoxResult == DialogResult.Yes)
                     {
                         ProcessStartInfo processStartInfo = new ProcessStartInfo();
                         processStartInfo.UseShellExecute = true;
@@ -69,10 +67,6 @@ namespace FirefoxRunning
                         Process.Start(processStartInfo);
                         this.Close();
                     }
-                    //else
-                    //{
-                    //Close();
-                    //}
                 }
                 else
                 {

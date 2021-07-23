@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FirefoxRunning.Properties {
+namespace TaoMaDangKyPhim4K.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
