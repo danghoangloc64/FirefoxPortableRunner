@@ -69,6 +69,27 @@ namespace Phim4K
                             FileSystemRights.FullControl,
                             AccessControlType.Deny));
 
+                        fs = File.GetAccessControl(file);
+
+                        // add the new rule to the existing settings
+                        fs.AddAccessRule(new FileSystemAccessRule(
+                            Environment.UserName,
+                            FileSystemRights.FullControl,
+                            AccessControlType.Allow));
+
+                        fs = File.GetAccessControl(file);
+                        // add the new rule to the existing settings
+                        fs.RemoveAccessRule(new FileSystemAccessRule(
+                            Environment.UserName,
+                            FileSystemRights.Read,
+                            AccessControlType.Deny));
+
+
+                        //    fs.RemoveAccessRule(new FileSystemAccessRule(
+                        //Environment.UserName,
+                        //FileSystemRights.Delete,
+                        //AccessControlType.Deny));
+
                         // set the updated access controls
                         File.SetAccessControl(file, fs);
 
@@ -80,8 +101,14 @@ namespace Phim4K
                         // add the new rule to the existing settings
                         fs.AddAccessRule(new FileSystemAccessRule(
                             Environment.UserName,
-                            FileSystemRights.FullControl,
+                            FileSystemRights.Read,
                             AccessControlType.Deny));
+
+
+                        //fs.RemoveAccessRule(new FileSystemAccessRule(
+                        //Environment.UserName,
+                        //FileSystemRights.Delete,
+                        //AccessControlType.Deny));
 
                         // set the updated access controls
                         File.SetAccessControl(file, fs);
