@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31702.278
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirefoxPortable", "FirefoxPortable\FirefoxPortable.csproj", "{5C244D49-95C0-4EA0-B7A4-2A02F27AC493}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirefoxPortableDatabase", "FirefoxPortableDatabase\FirefoxPortableDatabase.csproj", "{9ACE2AD9-3793-44B3-97F2-A965B1B613A9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirefoxPortableClient", "FirefoxPortableClient\FirefoxPortableClient.csproj", "{55A230E2-E8D8-4DCA-A32D-51828DF3DF60}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5C244D49-95C0-4EA0-B7A4-2A02F27AC493}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5C244D49-95C0-4EA0-B7A4-2A02F27AC493}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5C244D49-95C0-4EA0-B7A4-2A02F27AC493}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5C244D49-95C0-4EA0-B7A4-2A02F27AC493}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9ACE2AD9-3793-44B3-97F2-A965B1B613A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9ACE2AD9-3793-44B3-97F2-A965B1B613A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9ACE2AD9-3793-44B3-97F2-A965B1B613A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9ACE2AD9-3793-44B3-97F2-A965B1B613A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55A230E2-E8D8-4DCA-A32D-51828DF3DF60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55A230E2-E8D8-4DCA-A32D-51828DF3DF60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55A230E2-E8D8-4DCA-A32D-51828DF3DF60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55A230E2-E8D8-4DCA-A32D-51828DF3DF60}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

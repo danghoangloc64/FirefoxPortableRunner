@@ -1,11 +1,11 @@
-﻿using FirefoxPortable.Models.Infrastructure;
+﻿using FirefoxPortableDatabase.Models.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FirefoxPortable.Models
+namespace FirefoxPortableDatabase.Models
 {
     public class TaiKhoan : AuditableEntity<Guid>
     {

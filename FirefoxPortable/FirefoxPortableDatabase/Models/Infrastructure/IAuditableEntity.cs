@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FirefoxPortable.Models.Infrastructure
+namespace FirefoxPortableDatabase.Models.Infrastructure
 {
     public interface IAuditableEntity
     {

@@ -1,5 +1,5 @@
-﻿using FirefoxPortable.Models;
-using FirefoxPortable.Models.Infrastructure;
+﻿using FirefoxPortableDatabase.Models;
+using FirefoxPortableDatabase.Models.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -8,16 +8,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FirefoxPortable.DAL
+namespace FirefoxPortableDatabase.DAL
 {
-    class FirefoxPortableContext : DbContext
+    class FirefoxPortableDatabaseContext : DbContext
     {
         protected override void OnModelCreating(DbModelBuilder builder)
         {
             base.OnModelCreating(builder);
         }
 
-        public FirefoxPortableContext() : base("FirefoxPortableDB")
+        public FirefoxPortableDatabaseContext() : base("Server=.;Database=FirefoxPortableDB;User Id=sa;Password=123123;")
         {
         }
 
