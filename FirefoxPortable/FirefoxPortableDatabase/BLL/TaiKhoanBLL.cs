@@ -78,6 +78,26 @@ namespace FirefoxPortableDatabase.BLL
             }
         }
 
+        public ClientInformationModel GetClientInformationModelBySerialNo(string strDiskSerial)
+        {
+            using (var context = new FirefoxPortableDatabaseContext())
+            {
+                var data = context.TaiKhoan.FirstOrDefault(x => x.Deleted == false && x.DiskSerial == strDiskSerial && x.NgayHetHan > DateTime.Now);
+                if (data != null)
+                {
+                    data.Actived = true;
+                    ClientInformationModel clientInformationModel = new ClientInformationModel();
+                    clientInformationModel.LinkLinkDownloadProfile = data.LinkDownloadProfile?.LinkLinkDownloadProfile;
+                    clientInformationModel.FolderName = data.LinkDownloadProfile?.FolderName;
+                    return clientInformationModel;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
         public string Create(TaiKhoanCreateModel taiKhoanCreateModel)
         {
             try
@@ -166,19 +186,32 @@ namespace FirefoxPortableDatabase.BLL
             }
         }
 
-        public bool CheckKey(string strKey)
+        public ClientInformationModel GetClientInformationModel(string strKey, string strSerialNo)
         {
-            using (var context = new FirefoxPortableDatabaseContext())
+            try
             {
-                var data = context.TaiKhoan.FirstOrDefault(x => x.Deleted == false && x.Key == strKey);
-                if (data != null)
+                using (var context = new FirefoxPortableDatabaseContext())
                 {
-                    return true;
+                    var data = context.TaiKhoan.FirstOrDefault(x => x.Deleted == false && x.Key == strKey && x.NgayHetHan > DateTime.Now && x.Actived == false);
+                    if (data != null)
+                    {
+                        data.Actived = true;
+                        data.DiskSerial = strSerialNo;
+                        context.SaveChanges();
+                        ClientInformationModel clientInformationModel = new ClientInformationModel();
+                        clientInformationModel.LinkLinkDownloadProfile = data.LinkDownloadProfile?.LinkLinkDownloadProfile;
+                        clientInformationModel.FolderName = data.LinkDownloadProfile?.FolderName;
+                        return clientInformationModel;
+                    }
+                    else
+                    {
+                        return null;
+                    }
                 }
-                else
-                {
-                    return false;
-                }
+            }
+            catch
+            {
+                return null;
             }
         }
 

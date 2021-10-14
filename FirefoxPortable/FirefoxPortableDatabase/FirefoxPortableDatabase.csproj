@@ -45,6 +45,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Numerics" />
     <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
@@ -60,11 +61,14 @@
     <Compile Include="BLL\LinkDownloadProfileBLL.cs" />
     <Compile Include="BLL\TaiKhoanBLL.cs" />
     <Compile Include="DAL\FirefoxPortableDatabaseContext.cs" />
-    <Compile Include="Migrations\202110141108158_Init-Table.cs" />
-    <Compile Include="Migrations\202110141108158_Init-Table.designer.cs">
-      <DependentUpon>202110141108158_Init-Table.cs</DependentUpon>
+    <Compile Include="Extensions\ExtensionMethod.cs" />
+    <Compile Include="Migrations\202110141606147_init.cs" />
+    <Compile Include="Migrations\202110141606147_init.designer.cs">
+      <DependentUpon>202110141606147_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\ClientInformationModel.cs" />
+    <Compile Include="Models\HardDrive.cs" />
     <Compile Include="Models\Infrastructure\AuditableEntity.cs" />
     <Compile Include="Models\Infrastructure\IAuditableEntity.cs" />
     <Compile Include="Models\LinkDownloadProfile.cs" />
@@ -81,8 +85,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202110141108158_Init-Table.resx">
-      <DependentUpon>202110141108158_Init-Table.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202110141606147_init.resx">
+      <DependentUpon>202110141606147_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

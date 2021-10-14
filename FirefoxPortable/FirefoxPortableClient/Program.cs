@@ -1,4 +1,7 @@
-﻿using System;
+﻿using FirefoxPortableDatabase;
+using FirefoxPortableDatabase.BLL;
+using FirefoxPortableDatabase.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -15,9 +18,29 @@ namespace FirefoxPortableClient
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new DownloadForm());
+            List<HardDrive> hardDrives = ExtensionMethod.GetAllDiskDrives();
+            TaiKhoanBLL objTaiKhoanBLL = new TaiKhoanBLL();
+            ClientInformationModel clientInformationModel = objTaiKhoanBLL.GetClientInformationModelBySerialNo(hardDrives[0].SerialNo);
+            if (clientInformationModel == null)
+            {
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                Application.Run(new MainForm(hardDrives));
+            }
+            else
+            {
+                if (string.IsNullOrWhiteSpace(clientInformationModel.LinkLinkDownloadProfile))
+                {
+                    MessageBox.Show("Có lỗi xảy ra. Vui lòng liên hệ nhà cung cấp.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                else
+                {
+                    Application.EnableVisualStyles();
+                    Application.SetCompatibleTextRenderingDefault(false);
+                    Application.Run(new DownloadForm(clientInformationModel));
+                }
+            }
         }
     }
 }

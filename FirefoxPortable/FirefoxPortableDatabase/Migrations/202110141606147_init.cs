@@ -3,7 +3,7 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitTable : DbMigration
+    public partial class init : DbMigration
     {
         public override void Up()
         {
@@ -14,6 +14,7 @@
                         Id = c.Guid(nullable: false, identity: true),
                         TenLinkDownloadProfile = c.String(),
                         LinkLinkDownloadProfile = c.String(),
+                        FolderName = c.String(),
                         Deleted = c.Boolean(nullable: false),
                         CreatedDate = c.DateTime(nullable: false),
                         CreatedBy = c.String(),

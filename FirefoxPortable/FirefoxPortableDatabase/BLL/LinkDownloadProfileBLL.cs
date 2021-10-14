@@ -64,10 +64,20 @@ namespace FirefoxPortableDatabase.BLL
                     {
                         return "Tên profile đã tồn tại trong hệ thống. Vui lòng chọn tên khác.";
                     }
+
+                    string strFolderName = ExtensionMethod.RandomString();
+                    var checkFolderName = context.LinkDownloadProfile.FirstOrDefault(x => x.FolderName == strFolderName);
+                    while (checkFolderName != null)
+                    {
+                        strFolderName = ExtensionMethod.RandomString();
+                        checkFolderName = context.LinkDownloadProfile.FirstOrDefault(x => x.FolderName == strFolderName);
+                    }
+
                     LinkDownloadProfile linkDownloadProfile = new LinkDownloadProfile()
                     {
                         TenLinkDownloadProfile = linkDownloadProfileCreateModel.TenLinkDownloadProfile,
-                        LinkLinkDownloadProfile = linkDownloadProfileCreateModel.LinkLinkDownloadProfile
+                        LinkLinkDownloadProfile = linkDownloadProfileCreateModel.LinkLinkDownloadProfile,
+                        FolderName = strFolderName
                     };
                     context.LinkDownloadProfile.Add(linkDownloadProfile);
                     context.SaveChanges();
