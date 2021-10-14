@@ -31,7 +31,7 @@ namespace FirefoxPortable
         {
             this.label1 = new System.Windows.Forms.Label();
             this.txtKey = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnOK = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -53,28 +53,30 @@ namespace FirefoxPortable
             this.txtKey.Size = new System.Drawing.Size(616, 32);
             this.txtKey.TabIndex = 1;
             // 
-            // button1
+            // btnOK
             // 
-            this.button1.Font = new System.Drawing.Font("Times New Roman", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(261, 125);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(133, 39);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Đăng nhập";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnOK.Font = new System.Drawing.Font("Times New Roman", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnOK.Location = new System.Drawing.Point(261, 125);
+            this.btnOK.Name = "btnOK";
+            this.btnOK.Size = new System.Drawing.Size(133, 39);
+            this.btnOK.TabIndex = 2;
+            this.btnOK.Text = "Đăng nhập";
+            this.btnOK.UseVisualStyleBackColor = true;
+            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(653, 183);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnOK);
             this.Controls.Add(this.txtKey);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FirefoxPortable";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -84,7 +86,7 @@ namespace FirefoxPortable
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtKey;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnOK;
     }
 }
 
