@@ -22,6 +22,7 @@ namespace FirefoxPortableClient
 {
     public partial class DownloadForm : Form
     {
+        private bool m_bShowFireFox = false;
         private int m_iGioiHanLuotDownload;
         private int m_iDemLuotDownload;
         private string m_strFolder;
@@ -54,7 +55,7 @@ namespace FirefoxPortableClient
                 m_objSqliteFunction = new SqliteFunction(m_strFolderNameExtract);
                 m_objTaiKhoanBLL = new TaiKhoanBLL();
                 timer.Start();
-               
+
                 if (File.Exists(m_strFileNameDownLoad))
                 {
                     File.Delete(m_strFileNameDownLoad);
@@ -158,9 +159,16 @@ namespace FirefoxPortableClient
 
                 m_objTaiKhoanBLL.UpdateSoLuotDaDownload(m_iDemLuotDownload, m_objClientInformationModel.Id);
 
+                var chromeDriverProcesses = Process.GetProcesses().Where(pr => pr.ProcessName == "firefox");
+
+                if (chromeDriverProcesses != null && chromeDriverProcesses.Count() > 0)
+                {
+                    m_bShowFireFox = true;
+                }
+
                 if (m_iDemLuotDownload > m_iGioiHanLuotDownload)
                 {
-                    var chromeDriverProcesses = Process.GetProcesses().Where(pr => pr.ProcessName.ToLower().Contains("firefox"));
+                    chromeDriverProcesses = Process.GetProcesses().Where(pr => pr.ProcessName == "firefox");
 
                     foreach (var process in chromeDriverProcesses)
                     {
@@ -173,6 +181,21 @@ namespace FirefoxPortableClient
                     else
                     {
                         Environment.Exit(1);
+                    }
+                }
+
+                if (m_bShowFireFox)
+                {
+                    if (chromeDriverProcesses == null || chromeDriverProcesses.Count() == 0)
+                    {
+                        if (Application.MessageLoop)
+                        {
+                            Application.Exit();
+                        }
+                        else
+                        {
+                            Environment.Exit(1);
+                        }
                     }
                 }
             }
