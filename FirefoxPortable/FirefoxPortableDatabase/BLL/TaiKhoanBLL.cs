@@ -165,5 +165,22 @@ namespace FirefoxPortableDatabase.BLL
                 }
             }
         }
+
+        public bool CheckKey(string strKey)
+        {
+            using (var context = new FirefoxPortableDatabaseContext())
+            {
+                var data = context.TaiKhoan.FirstOrDefault(x => x.Deleted == false && x.Key == strKey);
+                if (data != null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+
     }
 }

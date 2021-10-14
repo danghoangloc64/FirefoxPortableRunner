@@ -14,6 +14,14 @@ namespace FirefoxPortableClient
 
         private void btnOK_Click(object sender, EventArgs e)
         {
+            if(m_objTaiKhoanBLL.CheckKey(txtKey.Text))
+            {
+                MessageBox.Show("OK");
+            }
+            else
+            {
+                MessageBox.Show("!OK");
+            }
         }
 
         private void MainForm_Load(object sender, EventArgs e)
