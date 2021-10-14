@@ -7,13 +7,13 @@ namespace FirefoxPortableDatabase.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class AddTableTaiKhoan : IMigrationMetadata
+    public sealed partial class InitTable : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddTableTaiKhoan));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InitTable));
         
         string IMigrationMetadata.Id
         {
-            get { return "202110140815246_Add-Table-TaiKhoan"; }
+            get { return "202110141108158_Init-Table"; }
         }
         
         string IMigrationMetadata.Source

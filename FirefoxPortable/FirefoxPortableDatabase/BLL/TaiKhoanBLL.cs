@@ -32,7 +32,7 @@ namespace FirefoxPortableDatabase.BLL
                 using (var context = new FirefoxPortableDatabaseContext())
                 {
                     List<TaiKhoanViewModel> taiKhoanViewModels = new List<TaiKhoanViewModel>();
-                    var datas = context.TaiKhoan.Where(x => x.Deleted == false);
+                    var datas = context.TaiKhoan.Where(x => x.Deleted == false).ToList();
                     int iSTT = 1;
                     foreach (var data in datas)
                     {
@@ -47,14 +47,122 @@ namespace FirefoxPortableDatabase.BLL
             }
         }
 
+        public TaiKhoanCreateModel GetTaiKhoanCreateModelById(string strId)
+        {
+            try
+            {
+                using (var context = new FirefoxPortableDatabaseContext())
+                {
+                    var data = context.TaiKhoan.FirstOrDefault(x => x.Deleted == false && x.Id.ToString() == strId);
+                    if (data != null)
+                    {
+                        return new TaiKhoanCreateModel()
+                        {
+                            Id = data.Id,
+                            TenLinkDownloadProfile = data.LinkDownloadProfile?.TenLinkDownloadProfile,
+                            LinkLinkDownloadProfile = data.LinkDownloadProfile?.LinkLinkDownloadProfile,
+                            Actived = data.Actived,
+                            Key = data.Key,
+                            NgayHetHan = data.NgayHetHan,
+                        };
+                    }
+                    else
+                    {
+                        return new TaiKhoanCreateModel();
+                    }
+                }
+            }
+            catch
+            {
+                return new TaiKhoanCreateModel();
+            }
+        }
 
+        public string Create(TaiKhoanCreateModel taiKhoanCreateModel)
+        {
+            try
+            {
+                using (var context = new FirefoxPortableDatabaseContext())
+                {
+                    var checkKey = context.TaiKhoan.FirstOrDefault(x => x.Deleted == false && x.Key == taiKhoanCreateModel.Key);
+                    if (checkKey != null)
+                    {
+                        return "Key đã tồn tại trong hệ thống, vui lòng nhập key khác.";
+                    }
+                    else
+                    {
+                        LinkDownloadProfile linkDownloadProfile = context.LinkDownloadProfile.FirstOrDefault(x => x.Deleted == false
+                                                                    && x.TenLinkDownloadProfile == taiKhoanCreateModel.TenLinkDownloadProfile
+                                                                    && x.LinkLinkDownloadProfile == taiKhoanCreateModel.LinkLinkDownloadProfile);
+                        TaiKhoan taiKhoan = new TaiKhoan()
+                        {
+                            Actived = taiKhoanCreateModel.Actived,
+                            Key = taiKhoanCreateModel.Key,
+                            LinkDownloadProfile = linkDownloadProfile,
+                            NgayHetHan = taiKhoanCreateModel.NgayHetHan,
+                        };
+                        context.TaiKhoan.Add(taiKhoan);
+                        context.SaveChanges();
+                        return string.Empty;
+                    }
+                }
+            }
+            catch
+            {
+                return "Có lỗi xảy ra.\r\nVui lòng kiểm tra lại";
+            }
+        }
 
-        public string Get()
+        public string Edit(TaiKhoanCreateModel tk)
+        {
+            try
+            {
+                using (var context = new FirefoxPortableDatabaseContext())
+                {
+                    var checkData = context.TaiKhoan.FirstOrDefault(x => x.Deleted == false && x.Id != tk.Id && x.Key == tk.Key);
+                    if (checkData != null)
+                    {
+                        return "Key đã tồn tại trong hệ thống. Vui lòng chọn key khác.";
+                    }
+                    var data = context.TaiKhoan.FirstOrDefault(x => x.Deleted == false && x.Id == tk.Id);
+                    if (data != null)
+                    {
+                        LinkDownloadProfile linkDownloadProfile = context.LinkDownloadProfile.FirstOrDefault(x => x.Deleted == false
+                                                                   && x.TenLinkDownloadProfile == tk.TenLinkDownloadProfile
+                                                                   && x.LinkLinkDownloadProfile == tk.LinkLinkDownloadProfile);
+                        data.Actived = tk.Actived;
+                        data.Key = tk.Key;
+                        data.LinkDownloadProfile = linkDownloadProfile;
+                        data.NgayHetHan = tk.NgayHetHan;
+                        context.SaveChanges();
+                        return string.Empty;
+                    }
+                    else
+                    {
+                        return "Có lỗi xảy ra.\r\nVui lòng kiểm tra lại";
+                    }
+                }
+            }
+            catch
+            {
+                return "Có lỗi xảy ra.\r\nVui lòng kiểm tra lại";
+            }
+        }
+
+        public bool Delete(string strId)
         {
             using (var context = new FirefoxPortableDatabaseContext())
             {
-                //var data = context.TaiKhoan.FirstOrDefault(x => x.Deleted == false).Test;
-                return "";
+                var data = context.TaiKhoan.FirstOrDefault(x => x.Deleted == false && x.Id.ToString() == strId);
+                if (data != null)
+                {
+                    data.Deleted = true;
+                    return context.SaveChanges() > 0;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
     }

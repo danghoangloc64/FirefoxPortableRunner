@@ -32,12 +32,38 @@ namespace FirefoxPortableDatabase.BLL
             }
         }
 
-        public void Create(LinkDownloadProfileCreateModel linkDownloadProfileCreateModel)
+        public List<LinkDownloadProfileSearchModel> GetListSearchModel()
         {
             try
             {
                 using (var context = new FirefoxPortableDatabaseContext())
                 {
+                    List<LinkDownloadProfileSearchModel> linkDownloadProfileSearchModels = new List<LinkDownloadProfileSearchModel>();
+                    var datas = context.LinkDownloadProfile.Where(x => x.Deleted == false);
+                    foreach (var data in datas)
+                    {
+                        linkDownloadProfileSearchModels.Add(new LinkDownloadProfileSearchModel(data));
+                    }
+                    return linkDownloadProfileSearchModels;
+                }
+            }
+            catch
+            {
+                return new List<LinkDownloadProfileSearchModel>();
+            }
+        }
+
+        public string Create(LinkDownloadProfileCreateModel linkDownloadProfileCreateModel)
+        {
+            try
+            {
+                using (var context = new FirefoxPortableDatabaseContext())
+                {
+                    var checkData = context.LinkDownloadProfile.FirstOrDefault(x => x.Deleted == false && x.TenLinkDownloadProfile == linkDownloadProfileCreateModel.TenLinkDownloadProfile);
+                    if (checkData != null)
+                    {
+                        return "Tên profile đã tồn tại trong hệ thống. Vui lòng chọn tên khác.";
+                    }
                     LinkDownloadProfile linkDownloadProfile = new LinkDownloadProfile()
                     {
                         TenLinkDownloadProfile = linkDownloadProfileCreateModel.TenLinkDownloadProfile,
@@ -45,11 +71,12 @@ namespace FirefoxPortableDatabase.BLL
                     };
                     context.LinkDownloadProfile.Add(linkDownloadProfile);
                     context.SaveChanges();
+                    return string.Empty;
                 }
             }
             catch
             {
-
+                return "Có lỗi xảy ra.\r\nVui lòng kiểm tra lại";
             }
         }
 
@@ -81,24 +108,34 @@ namespace FirefoxPortableDatabase.BLL
             }
         }
 
-        public void Edit(LinkDownloadProfileCreateModel linkDownloadProfileCreateModel)
+        public string Edit(LinkDownloadProfileCreateModel linkDownloadProfileCreateModel)
         {
             try
             {
                 using (var context = new FirefoxPortableDatabaseContext())
                 {
+                    var checkData = context.LinkDownloadProfile.FirstOrDefault(x => x.Deleted == false && x.Id != linkDownloadProfileCreateModel.Id && x.TenLinkDownloadProfile == linkDownloadProfileCreateModel.TenLinkDownloadProfile);
+                    if (checkData != null)
+                    {
+                        return "Tên profile đã tồn tại trong hệ thống. Vui lòng chọn tên khác.";
+                    }
                     var data = context.LinkDownloadProfile.FirstOrDefault(x => x.Deleted == false && x.Id == linkDownloadProfileCreateModel.Id);
                     if (data != null)
                     {
                         data.TenLinkDownloadProfile = linkDownloadProfileCreateModel.TenLinkDownloadProfile;
                         data.LinkLinkDownloadProfile = linkDownloadProfileCreateModel.LinkLinkDownloadProfile;
                         context.SaveChanges();
+                        return string.Empty;
+                    }
+                    else
+                    {
+                        return "Có lỗi xảy ra.\r\nVui lòng kiểm tra lại";
                     }
                 }
             }
             catch
             {
-
+                return "Có lỗi xảy ra.\r\nVui lòng kiểm tra lại";
             }
         }
 

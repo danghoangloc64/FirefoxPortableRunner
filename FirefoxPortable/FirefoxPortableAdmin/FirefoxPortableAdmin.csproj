@@ -131,6 +131,7 @@
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\FirefoxPortableDatabase.Models.LinkDownloadProfileCreateModel.datasource" />
+    <None Include="Properties\DataSources\FirefoxPortableDatabase.Models.LinkDownloadProfileSearchModel.datasource" />
     <None Include="Properties\DataSources\FirefoxPortableDatabase.Models.TaiKhoanCreateModel.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

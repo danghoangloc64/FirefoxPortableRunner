@@ -17,8 +17,8 @@ namespace FirefoxPortableDatabase.Models
             NgayHetHan = data.NgayHetHan;
             Actived = data.Actived;
             DiskSerial = data.DiskSerial;
-            TenLinkDownloadProfile = data.LinkDownloadProfile.TenLinkDownloadProfile;
-            LinkLinkDownloadProfile = data.LinkDownloadProfile.LinkLinkDownloadProfile;
+            TenLinkDownloadProfile = data.LinkDownloadProfile?.TenLinkDownloadProfile;
+            LinkLinkDownloadProfile = data.LinkDownloadProfile?.LinkLinkDownloadProfile;
             CreatedDate = data.CreatedDate;
             UpdatedDate = data.UpdatedDate;
         }

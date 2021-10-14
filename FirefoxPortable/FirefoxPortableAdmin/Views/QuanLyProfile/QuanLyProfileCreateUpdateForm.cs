@@ -36,7 +36,6 @@ namespace FirefoxPortableAdmin.Views.QuanLyProfile
             linkDownloadProfileCreateModelBindingSource.DataSource = m_objLinkDownloadProfileCreateModel;
         }
 
-
         public event EventHandler ButtonSaveClickEvent;
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -51,17 +50,26 @@ namespace FirefoxPortableAdmin.Views.QuanLyProfile
                 XtraMessageBox.Show("Vui lòng nhập đầy đủ thông tin.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
+            string strUpdateResult;
             if (m_bIsEditing == false)
             {
-                m_objLinkDownloadProfileBLL.Create(m_objLinkDownloadProfileCreateModel);
+                strUpdateResult = m_objLinkDownloadProfileBLL.Create(m_objLinkDownloadProfileCreateModel);
             }
             else
             {
-                m_objLinkDownloadProfileBLL.Edit(m_objLinkDownloadProfileCreateModel);
+                strUpdateResult = m_objLinkDownloadProfileBLL.Edit(m_objLinkDownloadProfileCreateModel);
             }
-            ButtonSaveClickEvent?.Invoke(null, null);
-            Close();
+
+            if (string.IsNullOrWhiteSpace(strUpdateResult))
+            {
+                ButtonSaveClickEvent?.Invoke(null, null);
+                Close();
+            }
+            else
+            {
+                XtraMessageBox.Show(strUpdateResult, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
         }
 
         private void QuanLyProfileCreateUpdateForm_Load(object sender, EventArgs e)

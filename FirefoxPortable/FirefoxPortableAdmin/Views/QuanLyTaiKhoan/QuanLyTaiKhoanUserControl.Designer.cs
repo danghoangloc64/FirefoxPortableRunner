@@ -80,6 +80,7 @@ namespace FirefoxPortableAdmin.Views.QuanLyTaiKhoan
             // 
             this.gridView.GridControl = this.gridControl;
             this.gridView.Name = "gridView";
+            this.gridView.OptionsBehavior.ReadOnly = true;
             this.gridView.OptionsView.ShowGroupPanel = false;
             // 
             // barManager1
@@ -122,6 +123,7 @@ namespace FirefoxPortableAdmin.Views.QuanLyTaiKhoan
             this.btnThemMoi.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnThemMoi.ImageOptions.Image")));
             this.btnThemMoi.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnThemMoi.ImageOptions.LargeImage")));
             this.btnThemMoi.Name = "btnThemMoi";
+            this.btnThemMoi.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnThemMoi_ItemClick);
             // 
             // btnSua
             // 
@@ -130,6 +132,7 @@ namespace FirefoxPortableAdmin.Views.QuanLyTaiKhoan
             this.btnSua.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnSua.ImageOptions.Image")));
             this.btnSua.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnSua.ImageOptions.LargeImage")));
             this.btnSua.Name = "btnSua";
+            this.btnSua.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnSua_ItemClick);
             // 
             // btnXoa
             // 
@@ -138,6 +141,7 @@ namespace FirefoxPortableAdmin.Views.QuanLyTaiKhoan
             this.btnXoa.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnXoa.ImageOptions.Image")));
             this.btnXoa.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnXoa.ImageOptions.LargeImage")));
             this.btnXoa.Name = "btnXoa";
+            this.btnXoa.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnXoa_ItemClick);
             // 
             // barDockControlTop
             // 

@@ -9,6 +9,12 @@ namespace FirefoxPortableDatabase.Models
 {
     public class LinkDownloadProfileSearchModel
     {
+        public LinkDownloadProfileSearchModel(LinkDownloadProfile data)
+        {
+            TenLinkDownloadProfile = data.TenLinkDownloadProfile;
+            LinkLinkDownloadProfile = data.LinkLinkDownloadProfile;
+        }
+
         [DisplayName("Tên profile")]
         public string TenLinkDownloadProfile { get; set; }
 

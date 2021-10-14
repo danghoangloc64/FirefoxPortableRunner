@@ -60,9 +60,9 @@
     <Compile Include="BLL\LinkDownloadProfileBLL.cs" />
     <Compile Include="BLL\TaiKhoanBLL.cs" />
     <Compile Include="DAL\FirefoxPortableDatabaseContext.cs" />
-    <Compile Include="Migrations\202110140815246_Add-Table-TaiKhoan.cs" />
-    <Compile Include="Migrations\202110140815246_Add-Table-TaiKhoan.designer.cs">
-      <DependentUpon>202110140815246_Add-Table-TaiKhoan.cs</DependentUpon>
+    <Compile Include="Migrations\202110141108158_Init-Table.cs" />
+    <Compile Include="Migrations\202110141108158_Init-Table.designer.cs">
+      <DependentUpon>202110141108158_Init-Table.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Infrastructure\AuditableEntity.cs" />
@@ -81,8 +81,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202110140815246_Add-Table-TaiKhoan.resx">
-      <DependentUpon>202110140815246_Add-Table-TaiKhoan.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202110141108158_Init-Table.resx">
+      <DependentUpon>202110141108158_Init-Table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

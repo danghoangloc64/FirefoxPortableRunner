@@ -38,11 +38,11 @@ namespace FirefoxPortableAdmin
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.btnTaiKhoan = new DevExpress.XtraBars.BarLargeButtonItem();
+            this.btnProfile = new DevExpress.XtraBars.BarLargeButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
-            this.btnProfile = new DevExpress.XtraBars.BarLargeButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl)).BeginInit();
@@ -131,6 +131,15 @@ namespace FirefoxPortableAdmin
             this.btnTaiKhoan.Name = "btnTaiKhoan";
             this.btnTaiKhoan.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnTaiKhoan_ItemClick);
             // 
+            // btnProfile
+            // 
+            this.btnProfile.Caption = "Quản lý Profile";
+            this.btnProfile.Id = 1;
+            this.btnProfile.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnProfile.ImageOptions.Image")));
+            this.btnProfile.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnProfile.ImageOptions.LargeImage")));
+            this.btnProfile.Name = "btnProfile";
+            this.btnProfile.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnProfile_ItemClick);
+            // 
             // barDockControlTop
             // 
             this.barDockControlTop.CausesValidation = false;
@@ -163,15 +172,6 @@ namespace FirefoxPortableAdmin
             this.barDockControlRight.Manager = this.barManager1;
             this.barDockControlRight.Size = new System.Drawing.Size(0, 521);
             // 
-            // btnProfile
-            // 
-            this.btnProfile.Caption = "Quản lý Profile";
-            this.btnProfile.Id = 1;
-            this.btnProfile.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barLargeButtonItem1.ImageOptions.Image")));
-            this.btnProfile.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barLargeButtonItem1.ImageOptions.LargeImage")));
-            this.btnProfile.Name = "btnProfile";
-            this.btnProfile.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnProfile_ItemClick);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -185,6 +185,7 @@ namespace FirefoxPortableAdmin
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Quản lý FirefoxPortable";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.MainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);

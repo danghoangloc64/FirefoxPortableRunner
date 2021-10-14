@@ -9,6 +9,14 @@ namespace FirefoxPortableDatabase.Models
 {
     public class TaiKhoanCreateModel
     {
+        public TaiKhoanCreateModel()
+        {
+            NgayHetHan = DateTime.Today;
+        }
+
+        [DisplayName("Id")]
+        public Guid Id { get; set; }
+
         [DisplayName("Key")]
         public string Key { get; set; }
 

@@ -14,7 +14,6 @@ namespace FirefoxPortableDatabase.Models
         public bool Actived { get; set; }
         public string DiskSerial { get; set; }
 
-        public Guid LinkDownloadProfileId { get; set; }
         public virtual LinkDownloadProfile LinkDownloadProfile { get; set; }
     }
 }

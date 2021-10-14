@@ -3,7 +3,7 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class AddTableTaiKhoan : DbMigration
+    public partial class InitTable : DbMigration
     {
         public override void Up()
         {
@@ -31,23 +31,23 @@
                         NgayHetHan = c.DateTime(),
                         Actived = c.Boolean(nullable: false),
                         DiskSerial = c.String(),
-                        LinkDownloadProfileId = c.Guid(nullable: false),
                         Deleted = c.Boolean(nullable: false),
                         CreatedDate = c.DateTime(nullable: false),
                         CreatedBy = c.String(),
                         UpdatedDate = c.DateTime(nullable: false),
                         UpdatedBy = c.String(),
+                        LinkDownloadProfile_Id = c.Guid(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.LinkDownloadProfiles", t => t.LinkDownloadProfileId, cascadeDelete: true)
-                .Index(t => t.LinkDownloadProfileId);
+                .ForeignKey("dbo.LinkDownloadProfiles", t => t.LinkDownloadProfile_Id)
+                .Index(t => t.LinkDownloadProfile_Id);
             
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.TaiKhoans", "LinkDownloadProfileId", "dbo.LinkDownloadProfiles");
-            DropIndex("dbo.TaiKhoans", new[] { "LinkDownloadProfileId" });
+            DropForeignKey("dbo.TaiKhoans", "LinkDownloadProfile_Id", "dbo.LinkDownloadProfiles");
+            DropIndex("dbo.TaiKhoans", new[] { "LinkDownloadProfile_Id" });
             DropTable("dbo.TaiKhoans");
             DropTable("dbo.LinkDownloadProfiles");
         }

@@ -14,7 +14,6 @@ namespace FirefoxPortableClient
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(m_objTaiKhoanBLL.Get());
         }
 
         private void MainForm_Load(object sender, EventArgs e)
