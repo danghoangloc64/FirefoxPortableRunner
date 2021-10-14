@@ -20,6 +20,7 @@ namespace FirefoxPortableClient
         private void MainForm_Load(object sender, EventArgs e)
         {
             m_objTaiKhoanBLL = new TaiKhoanBLL();
+            m_objTaiKhoanBLL.FirstLoadFirefoxPortableDatabaseContext();
         }
     }
 }

@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirefoxPortableDatabase", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirefoxPortableClient", "FirefoxPortableClient\FirefoxPortableClient.csproj", "{55A230E2-E8D8-4DCA-A32D-51828DF3DF60}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirefoxPortableAdmin", "FirefoxPortableAdmin\FirefoxPortableAdmin.csproj", "{83AD4EA7-6601-4CF7-88C2-9062B92BB126}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{55A230E2-E8D8-4DCA-A32D-51828DF3DF60}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{55A230E2-E8D8-4DCA-A32D-51828DF3DF60}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{55A230E2-E8D8-4DCA-A32D-51828DF3DF60}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83AD4EA7-6601-4CF7-88C2-9062B92BB126}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83AD4EA7-6601-4CF7-88C2-9062B92BB126}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83AD4EA7-6601-4CF7-88C2-9062B92BB126}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83AD4EA7-6601-4CF7-88C2-9062B92BB126}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

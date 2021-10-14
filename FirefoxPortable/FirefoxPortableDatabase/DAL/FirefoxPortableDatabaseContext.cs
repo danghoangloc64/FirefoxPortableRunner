@@ -22,6 +22,7 @@ namespace FirefoxPortableDatabase.DAL
         }
 
         public DbSet<TaiKhoan> TaiKhoan { get; set; }
+        public DbSet<LinkDownloadProfile> LinkDownloadProfile { get; set; }
 
         public override int SaveChanges()
         {
