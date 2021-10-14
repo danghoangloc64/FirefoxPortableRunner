@@ -1,5 +1,7 @@
 ﻿using FirefoxPortableDatabase;
+using FirefoxPortableDatabase.BLL;
 using FirefoxPortableDatabase.Models;
+using Newtonsoft.Json.Linq;
 using RestSharp;
 using System;
 using System.Collections.Generic;
@@ -20,10 +22,15 @@ namespace FirefoxPortableClient
 {
     public partial class DownloadForm : Form
     {
+        private int m_iGioiHanLuotDownload;
+        private int m_iDemLuotDownload;
         private string m_strFolder;
         private string m_strFileNameDownLoad;
         private string m_strFolderNameExtract;
+        private SqliteFunction m_objSqliteFunction;
+        private List<moz_annos> m_objmoz_annoss;
         private ClientInformationModel m_objClientInformationModel;
+        private TaiKhoanBLL m_objTaiKhoanBLL;
 
         public DownloadForm(ClientInformationModel clientInformationModel)
         {
@@ -35,6 +42,7 @@ namespace FirefoxPortableClient
             m_strFileNameDownLoad = Path.Combine(m_strFolder, ExtensionMethod.RandomString() + ".zip");
             m_objClientInformationModel = clientInformationModel;
             m_strFolderNameExtract = Path.Combine(m_strFolder, clientInformationModel.FolderName);
+            m_iGioiHanLuotDownload = m_objClientInformationModel.GioiHanLuotDownload;
             InitializeComponent();
         }
 
@@ -43,6 +51,10 @@ namespace FirefoxPortableClient
         {
             try
             {
+                m_objSqliteFunction = new SqliteFunction(m_strFolderNameExtract);
+                m_objTaiKhoanBLL = new TaiKhoanBLL();
+                timer.Start();
+                timerHide.Start();
                 if (File.Exists(m_strFileNameDownLoad))
                 {
                     File.Delete(m_strFileNameDownLoad);
@@ -62,8 +74,6 @@ namespace FirefoxPortableClient
                 }
                 else
                 {
-
-
                     using (var wc = new WebClient())
                     {
                         wc.Headers.Add("sec-ch-ua", "\"Chromium\";v=\"94\", \"Google Chrome\";v=\"94\", \";Not A Brand\";v=\"99\"");
@@ -99,14 +109,6 @@ namespace FirefoxPortableClient
             p.StartInfo.FileName = @"App\Firefox64\firefox.exe";
             p.StartInfo.Arguments = @"/K -profile " + m_strFolderNameExtract;
             p.Start();
-            if (Application.MessageLoop)
-            {
-                Application.Exit();
-            }
-            else
-            {
-                Environment.Exit(1);
-            }
         }
 
         void wc_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
@@ -131,6 +133,57 @@ namespace FirefoxPortableClient
         private void button1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            try
+            {
+                m_iDemLuotDownload = 0;
+                m_iGioiHanLuotDownload = m_objTaiKhoanBLL.GetGioiHanLuotDownload(m_objClientInformationModel.Id);
+                var dt = m_objSqliteFunction.selectQuery("SELECT * FROM 'moz_annos'");
+                m_objmoz_annoss = m_objSqliteFunction.ConvertTo<moz_annos>(dt);
+                var datas = m_objmoz_annoss.Where(x => x.content.Contains("endTime")).Select(x => x.content).ToList();
+
+                foreach (var data in datas)
+                {
+                    JObject obj = JObject.Parse(data);
+                    var date = (new DateTime(1970, 1, 1)).AddMilliseconds((double)obj["endTime"]).ToLocalTime();
+                    if (date > m_objClientInformationModel.NgayKichHoat.Value)
+                    {
+                        m_iDemLuotDownload++;
+                    }
+                }
+
+                m_objTaiKhoanBLL.UpdateSoLuotDaDownload(m_iDemLuotDownload, m_objClientInformationModel.Id);
+
+                if (m_iDemLuotDownload > m_iGioiHanLuotDownload)
+                {
+                    var chromeDriverProcesses = Process.GetProcesses().Where(pr => pr.ProcessName.ToLower().Contains("firefox"));
+
+                    foreach (var process in chromeDriverProcesses)
+                    {
+                        process.Kill();
+                    }
+                    if (Application.MessageLoop)
+                    {
+                        Application.Exit();
+                    }
+                    else
+                    {
+                        Environment.Exit(1);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        private void timerHide_Tick(object sender, EventArgs e)
+        {
+            this.Hide();
         }
     }
 }

@@ -61,6 +61,7 @@ namespace FirefoxPortableDatabase.BLL
                             Id = data.Id,
                             TenLinkDownloadProfile = data.LinkDownloadProfile?.TenLinkDownloadProfile,
                             LinkLinkDownloadProfile = data.LinkDownloadProfile?.LinkLinkDownloadProfile,
+                            GioiHanLuotDownload = data.GioiHanLuotDownload,
                             Actived = data.Actived,
                             Key = data.Key,
                             NgayHetHan = data.NgayHetHan,
@@ -82,7 +83,7 @@ namespace FirefoxPortableDatabase.BLL
         {
             using (var context = new FirefoxPortableDatabaseContext())
             {
-                var data = context.TaiKhoan.FirstOrDefault(x => x.Deleted == false && x.DiskSerial == strDiskSerial && x.NgayHetHan > DateTime.Now);
+                var data = context.TaiKhoan.FirstOrDefault(x => x.Deleted == false && x.DiskSerial == strDiskSerial && x.NgayHetHan > DateTime.Now && x.GioiHanLuotDownload >= x.SoLuotDaDownload);
                 if (data != null)
                 {
                     data.Actived = true;
@@ -91,6 +92,9 @@ namespace FirefoxPortableDatabase.BLL
                     clientInformationModel.LinkLinkDownloadProfile = data.LinkDownloadProfile?.LinkLinkDownloadProfile;
                     clientInformationModel.FolderName = data.LinkDownloadProfile?.FolderName;
                     clientInformationModel.OtherFolderName = context.LinkDownloadProfile.Select(x => x.FolderName).ToList();
+                    clientInformationModel.GioiHanLuotDownload = data.GioiHanLuotDownload;
+                    clientInformationModel.NgayKichHoat = data.NgayKichHoat;
+                    clientInformationModel.Id = data.Id;
                     if (!string.IsNullOrWhiteSpace(clientInformationModel.FolderName))
                     {
                         clientInformationModel.OtherFolderName.Remove(clientInformationModel.FolderName);
@@ -125,6 +129,7 @@ namespace FirefoxPortableDatabase.BLL
                             Actived = taiKhoanCreateModel.Actived,
                             Key = taiKhoanCreateModel.Key,
                             LinkDownloadProfile = linkDownloadProfile,
+                            GioiHanLuotDownload = taiKhoanCreateModel.GioiHanLuotDownload,
                             NgayHetHan = taiKhoanCreateModel.NgayHetHan,
                         };
                         context.TaiKhoan.Add(taiKhoan);
@@ -160,6 +165,7 @@ namespace FirefoxPortableDatabase.BLL
                         data.Key = tk.Key;
                         data.LinkDownloadProfile = linkDownloadProfile;
                         data.NgayHetHan = tk.NgayHetHan;
+                        data.GioiHanLuotDownload = tk.GioiHanLuotDownload;
                         context.SaveChanges();
                         return string.Empty;
                     }
@@ -172,6 +178,36 @@ namespace FirefoxPortableDatabase.BLL
             catch
             {
                 return "Có lỗi xảy ra.\r\nVui lòng kiểm tra lại";
+            }
+        }
+
+        public void UpdateSoLuotDaDownload(int m_iDemLuotDownload, Guid id)
+        {
+            using (var context = new FirefoxPortableDatabaseContext())
+            {
+                var data = context.TaiKhoan.FirstOrDefault(x => x.Deleted == false && x.Id == id);
+                if (data != null)
+                {
+                    data.SoLuotDaDownload = m_iDemLuotDownload;
+                    context.SaveChanges();
+                }
+
+            }
+        }
+
+        public int GetGioiHanLuotDownload(Guid id)
+        {
+            using (var context = new FirefoxPortableDatabaseContext())
+            {
+                var data = context.TaiKhoan.FirstOrDefault(x => x.Deleted == false && x.Id == id);
+                if (data != null)
+                {
+                    return data.GioiHanLuotDownload;
+                }
+                else
+                {
+                    return 0;
+                }
             }
         }
 
@@ -198,9 +234,10 @@ namespace FirefoxPortableDatabase.BLL
             {
                 using (var context = new FirefoxPortableDatabaseContext())
                 {
-                    var data = context.TaiKhoan.FirstOrDefault(x => x.Deleted == false && x.Key == strKey && x.NgayHetHan > DateTime.Now && x.Actived == false);
+                    var data = context.TaiKhoan.FirstOrDefault(x => x.Deleted == false && x.Key == strKey && x.NgayHetHan > DateTime.Now && x.Actived == false && x.GioiHanLuotDownload >= x.SoLuotDaDownload);
                     if (data != null)
                     {
+                        data.NgayKichHoat = DateTime.Today;
                         data.Actived = true;
                         data.DiskSerial = strSerialNo;
                         context.SaveChanges();
@@ -208,6 +245,9 @@ namespace FirefoxPortableDatabase.BLL
                         clientInformationModel.LinkLinkDownloadProfile = data.LinkDownloadProfile?.LinkLinkDownloadProfile;
                         clientInformationModel.FolderName = data.LinkDownloadProfile?.FolderName;
                         clientInformationModel.OtherFolderName = context.LinkDownloadProfile.Select(x => x.FolderName).ToList();
+                        clientInformationModel.GioiHanLuotDownload = data.GioiHanLuotDownload;
+                        clientInformationModel.NgayKichHoat = data.NgayKichHoat;
+                        clientInformationModel.Id = data.Id;
                         if (!string.IsNullOrWhiteSpace(clientInformationModel.FolderName))
                         {
                             clientInformationModel.OtherFolderName.Remove(clientInformationModel.FolderName);

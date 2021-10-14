@@ -14,10 +14,14 @@ namespace FirefoxPortableDatabase.DAL
             base.OnModelCreating(builder);
         }
 
-        public FirefoxPortableDatabaseContext() : base("Data Source=SQL5103.site4now.net;Initial Catalog=db_a7b187_firefoxportabledb;User Id=db_a7b187_firefoxportabledb_admin;Password=1qazZAQ!")
-        {
-        }
+        //public FirefoxPortableDatabaseContext() : base("Data Source=SQL5103.site4now.net;Initial Catalog=db_a7b187_firefoxportabledb;User Id=db_a7b187_firefoxportabledb_admin;Password=1qazZAQ!")
+        //{
+        //}
 
+        public FirefoxPortableDatabaseContext() : base("Data Source=.;Initial Catalog=FirefoxPortableDB;User Id=sa;Password=123123")
+        {
+
+        }
         public DbSet<TaiKhoan> TaiKhoan { get; set; }
         public DbSet<LinkDownloadProfile> LinkDownloadProfile { get; set; }
 

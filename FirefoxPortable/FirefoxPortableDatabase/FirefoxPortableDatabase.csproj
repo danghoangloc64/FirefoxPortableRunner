@@ -62,9 +62,9 @@
     <Compile Include="BLL\TaiKhoanBLL.cs" />
     <Compile Include="DAL\FirefoxPortableDatabaseContext.cs" />
     <Compile Include="Extensions\ExtensionMethod.cs" />
-    <Compile Include="Migrations\202110141606147_init.cs" />
-    <Compile Include="Migrations\202110141606147_init.designer.cs">
-      <DependentUpon>202110141606147_init.cs</DependentUpon>
+    <Compile Include="Migrations\202110142038410_add-table.cs" />
+    <Compile Include="Migrations\202110142038410_add-table.designer.cs">
+      <DependentUpon>202110142038410_add-table.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ClientInformationModel.cs" />
@@ -75,6 +75,7 @@
     <Compile Include="Models\LinkDownloadProfileCreateModel.cs" />
     <Compile Include="Models\LinkDownloadProfileSearchModel.cs" />
     <Compile Include="Models\LinkDownloadProfileViewModel.cs" />
+    <Compile Include="Models\moz_annos.cs" />
     <Compile Include="Models\TaiKhoan.cs" />
     <Compile Include="Models\TaiKhoanCreateModel.cs" />
     <Compile Include="Models\TaiKhoanViewModel.cs" />
@@ -85,8 +86,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202110141606147_init.resx">
-      <DependentUpon>202110141606147_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202110142038410_add-table.resx">
+      <DependentUpon>202110142038410_add-table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

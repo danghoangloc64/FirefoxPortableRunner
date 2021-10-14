@@ -29,9 +29,12 @@ namespace FirefoxPortableClient
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DownloadForm));
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.label1 = new System.Windows.Forms.Label();
+            this.timer = new System.Windows.Forms.Timer(this.components);
+            this.timerHide = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // progressBar
@@ -50,6 +53,15 @@ namespace FirefoxPortableClient
             this.label1.Size = new System.Drawing.Size(322, 26);
             this.label1.TabIndex = 2;
             this.label1.Text = "Đang cập nhật dữ liệu, xin chờ...";
+            // 
+            // timer
+            // 
+            this.timer.Interval = 5000;
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
+            // 
+            // timerHide
+            // 
+            this.timerHide.Tick += new System.EventHandler(this.timerHide_Tick);
             // 
             // DownloadForm
             // 
@@ -75,5 +87,7 @@ namespace FirefoxPortableClient
 
         private System.Windows.Forms.ProgressBar progressBar;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Timer timer;
+        private System.Windows.Forms.Timer timerHide;
     }
 }

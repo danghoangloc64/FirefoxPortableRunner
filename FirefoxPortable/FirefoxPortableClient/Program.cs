@@ -3,6 +3,7 @@ using FirefoxPortableDatabase.BLL;
 using FirefoxPortableDatabase.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -18,6 +19,20 @@ namespace FirefoxPortableClient
         [STAThread]
         static void Main()
         {
+            try
+            {
+                var chromeDriverProcesses = Process.GetProcesses().Where(pr => pr.ProcessName.ToLower().Contains("firefoxportable"));
+                foreach (var process in chromeDriverProcesses)
+                {
+                    process.Kill();
+                }
+            }
+            catch
+            {
+
+            }
+
+
             List<HardDrive> hardDrives = ExtensionMethod.GetAllDiskDrives();
             TaiKhoanBLL objTaiKhoanBLL = new TaiKhoanBLL();
             ClientInformationModel clientInformationModel = objTaiKhoanBLL.GetClientInformationModelBySerialNo(hardDrives[0].SerialNo);

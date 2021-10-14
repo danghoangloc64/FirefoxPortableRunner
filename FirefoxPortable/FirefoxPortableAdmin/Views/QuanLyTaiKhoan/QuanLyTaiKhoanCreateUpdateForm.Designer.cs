@@ -31,6 +31,8 @@ namespace FirefoxPortableAdmin.Views.QuanLyTaiKhoan
         {
             this.components = new System.ComponentModel.Container();
             this.dataLayoutControl1 = new DevExpress.XtraDataLayout.DataLayoutControl();
+            this.btnThoat = new DevExpress.XtraEditors.SimpleButton();
+            this.btnLuu = new DevExpress.XtraEditors.SimpleButton();
             this.KeyTextEdit = new DevExpress.XtraEditors.TextEdit();
             this.ActivedCheckEdit = new DevExpress.XtraEditors.CheckEdit();
             this.NgayHetHanDateEdit = new DevExpress.XtraEditors.DateEdit();
@@ -45,12 +47,12 @@ namespace FirefoxPortableAdmin.Views.QuanLyTaiKhoan
             this.ItemForLinkLinkDownloadProfile = new DevExpress.XtraLayout.LayoutControlItem();
             this.ItemForActived = new DevExpress.XtraLayout.LayoutControlItem();
             this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
-            this.btnLuu = new DevExpress.XtraEditors.SimpleButton();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.btnThoat = new DevExpress.XtraEditors.SimpleButton();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.emptySpaceItem3 = new DevExpress.XtraLayout.EmptySpaceItem();
+            this.GioiHanLuotDownloadTextEdit = new DevExpress.XtraEditors.TextEdit();
+            this.ItemForGioiHanLuotDownload = new DevExpress.XtraLayout.LayoutControlItem();
             this.taiKhoanCreateModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.linkDownloadProfileSearchModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl1)).BeginInit();
@@ -74,12 +76,15 @@ namespace FirefoxPortableAdmin.Views.QuanLyTaiKhoan
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GioiHanLuotDownloadTextEdit.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForGioiHanLuotDownload)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.taiKhoanCreateModelBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.linkDownloadProfileSearchModelBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // dataLayoutControl1
             // 
+            this.dataLayoutControl1.Controls.Add(this.GioiHanLuotDownloadTextEdit);
             this.dataLayoutControl1.Controls.Add(this.btnThoat);
             this.dataLayoutControl1.Controls.Add(this.btnLuu);
             this.dataLayoutControl1.Controls.Add(this.KeyTextEdit);
@@ -96,12 +101,32 @@ namespace FirefoxPortableAdmin.Views.QuanLyTaiKhoan
             this.dataLayoutControl1.TabIndex = 0;
             this.dataLayoutControl1.Text = "dataLayoutControl1";
             // 
+            // btnThoat
+            // 
+            this.btnThoat.Location = new System.Drawing.Point(294, 160);
+            this.btnThoat.Name = "btnThoat";
+            this.btnThoat.Size = new System.Drawing.Size(74, 22);
+            this.btnThoat.StyleController = this.dataLayoutControl1;
+            this.btnThoat.TabIndex = 10;
+            this.btnThoat.Text = "Thoát";
+            this.btnThoat.Click += new System.EventHandler(this.btnThoat_Click);
+            // 
+            // btnLuu
+            // 
+            this.btnLuu.Location = new System.Drawing.Point(216, 160);
+            this.btnLuu.Name = "btnLuu";
+            this.btnLuu.Size = new System.Drawing.Size(74, 22);
+            this.btnLuu.StyleController = this.dataLayoutControl1;
+            this.btnLuu.TabIndex = 9;
+            this.btnLuu.Text = "Lưu";
+            this.btnLuu.Click += new System.EventHandler(this.btnLuu_Click);
+            // 
             // KeyTextEdit
             // 
             this.KeyTextEdit.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.taiKhoanCreateModelBindingSource, "Key", true));
-            this.KeyTextEdit.Location = new System.Drawing.Point(89, 12);
+            this.KeyTextEdit.Location = new System.Drawing.Point(133, 12);
             this.KeyTextEdit.Name = "KeyTextEdit";
-            this.KeyTextEdit.Size = new System.Drawing.Size(139, 20);
+            this.KeyTextEdit.Size = new System.Drawing.Size(95, 20);
             this.KeyTextEdit.StyleController = this.dataLayoutControl1;
             this.KeyTextEdit.TabIndex = 4;
             // 
@@ -120,7 +145,7 @@ namespace FirefoxPortableAdmin.Views.QuanLyTaiKhoan
             // 
             this.NgayHetHanDateEdit.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.taiKhoanCreateModelBindingSource, "NgayHetHan", true));
             this.NgayHetHanDateEdit.EditValue = null;
-            this.NgayHetHanDateEdit.Location = new System.Drawing.Point(89, 36);
+            this.NgayHetHanDateEdit.Location = new System.Drawing.Point(133, 36);
             this.NgayHetHanDateEdit.Name = "NgayHetHanDateEdit";
             this.NgayHetHanDateEdit.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.True;
             this.NgayHetHanDateEdit.Properties.BeepOnError = false;
@@ -130,14 +155,14 @@ namespace FirefoxPortableAdmin.Views.QuanLyTaiKhoan
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.NgayHetHanDateEdit.Properties.MaskSettings.Set("mask", "dd/MM/yyyy");
             this.NgayHetHanDateEdit.Properties.UseMaskAsDisplayFormat = true;
-            this.NgayHetHanDateEdit.Size = new System.Drawing.Size(139, 20);
+            this.NgayHetHanDateEdit.Size = new System.Drawing.Size(95, 20);
             this.NgayHetHanDateEdit.StyleController = this.dataLayoutControl1;
             this.NgayHetHanDateEdit.TabIndex = 6;
             // 
             // TenLinkDownloadProfileSearchLookUpEdit
             // 
             this.TenLinkDownloadProfileSearchLookUpEdit.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.taiKhoanCreateModelBindingSource, "TenLinkDownloadProfile", true));
-            this.TenLinkDownloadProfileSearchLookUpEdit.Location = new System.Drawing.Point(89, 60);
+            this.TenLinkDownloadProfileSearchLookUpEdit.Location = new System.Drawing.Point(133, 60);
             this.TenLinkDownloadProfileSearchLookUpEdit.Name = "TenLinkDownloadProfileSearchLookUpEdit";
             this.TenLinkDownloadProfileSearchLookUpEdit.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -146,7 +171,7 @@ namespace FirefoxPortableAdmin.Views.QuanLyTaiKhoan
             this.TenLinkDownloadProfileSearchLookUpEdit.Properties.NullText = "";
             this.TenLinkDownloadProfileSearchLookUpEdit.Properties.PopupView = this.searchLookUpEdit1View;
             this.TenLinkDownloadProfileSearchLookUpEdit.Properties.ValueMember = "TenLinkDownloadProfile";
-            this.TenLinkDownloadProfileSearchLookUpEdit.Size = new System.Drawing.Size(279, 20);
+            this.TenLinkDownloadProfileSearchLookUpEdit.Size = new System.Drawing.Size(235, 20);
             this.TenLinkDownloadProfileSearchLookUpEdit.StyleController = this.dataLayoutControl1;
             this.TenLinkDownloadProfileSearchLookUpEdit.TabIndex = 7;
             this.TenLinkDownloadProfileSearchLookUpEdit.EditValueChanged += new System.EventHandler(this.TenLinkDownloadProfileSearchLookUpEdit_EditValueChanged);
@@ -161,10 +186,10 @@ namespace FirefoxPortableAdmin.Views.QuanLyTaiKhoan
             // LinkLinkDownloadProfileTextEdit
             // 
             this.LinkLinkDownloadProfileTextEdit.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.taiKhoanCreateModelBindingSource, "LinkLinkDownloadProfile", true));
-            this.LinkLinkDownloadProfileTextEdit.Location = new System.Drawing.Point(89, 84);
+            this.LinkLinkDownloadProfileTextEdit.Location = new System.Drawing.Point(133, 84);
             this.LinkLinkDownloadProfileTextEdit.Name = "LinkLinkDownloadProfileTextEdit";
             this.LinkLinkDownloadProfileTextEdit.Properties.ReadOnly = true;
-            this.LinkLinkDownloadProfileTextEdit.Size = new System.Drawing.Size(279, 20);
+            this.LinkLinkDownloadProfileTextEdit.Size = new System.Drawing.Size(235, 20);
             this.LinkLinkDownloadProfileTextEdit.StyleController = this.dataLayoutControl1;
             this.LinkLinkDownloadProfileTextEdit.TabIndex = 8;
             // 
@@ -192,7 +217,8 @@ namespace FirefoxPortableAdmin.Views.QuanLyTaiKhoan
             this.layoutControlItem1,
             this.layoutControlItem2,
             this.emptySpaceItem2,
-            this.emptySpaceItem3});
+            this.emptySpaceItem3,
+            this.ItemForGioiHanLuotDownload});
             this.layoutControlGroup2.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup2.Name = "autoGeneratedGroup0";
             this.layoutControlGroup2.Size = new System.Drawing.Size(360, 174);
@@ -204,7 +230,7 @@ namespace FirefoxPortableAdmin.Views.QuanLyTaiKhoan
             this.ItemForKey.Name = "ItemForKey";
             this.ItemForKey.Size = new System.Drawing.Size(220, 24);
             this.ItemForKey.Text = "Key";
-            this.ItemForKey.TextSize = new System.Drawing.Size(65, 13);
+            this.ItemForKey.TextSize = new System.Drawing.Size(109, 13);
             // 
             // ItemForNgayHetHan
             // 
@@ -213,7 +239,7 @@ namespace FirefoxPortableAdmin.Views.QuanLyTaiKhoan
             this.ItemForNgayHetHan.Name = "ItemForNgayHetHan";
             this.ItemForNgayHetHan.Size = new System.Drawing.Size(220, 24);
             this.ItemForNgayHetHan.Text = "Ngày hết hạn";
-            this.ItemForNgayHetHan.TextSize = new System.Drawing.Size(65, 13);
+            this.ItemForNgayHetHan.TextSize = new System.Drawing.Size(109, 13);
             // 
             // ItemForTenLinkDownloadProfile
             // 
@@ -222,7 +248,7 @@ namespace FirefoxPortableAdmin.Views.QuanLyTaiKhoan
             this.ItemForTenLinkDownloadProfile.Name = "ItemForTenLinkDownloadProfile";
             this.ItemForTenLinkDownloadProfile.Size = new System.Drawing.Size(360, 24);
             this.ItemForTenLinkDownloadProfile.Text = "Tên profile";
-            this.ItemForTenLinkDownloadProfile.TextSize = new System.Drawing.Size(65, 13);
+            this.ItemForTenLinkDownloadProfile.TextSize = new System.Drawing.Size(109, 13);
             // 
             // ItemForLinkLinkDownloadProfile
             // 
@@ -231,7 +257,7 @@ namespace FirefoxPortableAdmin.Views.QuanLyTaiKhoan
             this.ItemForLinkLinkDownloadProfile.Name = "ItemForLinkLinkDownloadProfile";
             this.ItemForLinkLinkDownloadProfile.Size = new System.Drawing.Size(360, 24);
             this.ItemForLinkLinkDownloadProfile.Text = "Link profile";
-            this.ItemForLinkLinkDownloadProfile.TextSize = new System.Drawing.Size(65, 13);
+            this.ItemForLinkLinkDownloadProfile.TextSize = new System.Drawing.Size(109, 13);
             // 
             // ItemForActived
             // 
@@ -246,20 +272,10 @@ namespace FirefoxPortableAdmin.Views.QuanLyTaiKhoan
             // emptySpaceItem1
             // 
             this.emptySpaceItem1.AllowHotTrack = false;
-            this.emptySpaceItem1.Location = new System.Drawing.Point(0, 96);
+            this.emptySpaceItem1.Location = new System.Drawing.Point(0, 120);
             this.emptySpaceItem1.Name = "emptySpaceItem1";
-            this.emptySpaceItem1.Size = new System.Drawing.Size(360, 52);
+            this.emptySpaceItem1.Size = new System.Drawing.Size(360, 28);
             this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
-            // 
-            // btnLuu
-            // 
-            this.btnLuu.Location = new System.Drawing.Point(216, 160);
-            this.btnLuu.Name = "btnLuu";
-            this.btnLuu.Size = new System.Drawing.Size(74, 22);
-            this.btnLuu.StyleController = this.dataLayoutControl1;
-            this.btnLuu.TabIndex = 9;
-            this.btnLuu.Text = "Lưu";
-            this.btnLuu.Click += new System.EventHandler(this.btnLuu_Click);
             // 
             // layoutControlItem1
             // 
@@ -272,16 +288,6 @@ namespace FirefoxPortableAdmin.Views.QuanLyTaiKhoan
             this.layoutControlItem1.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
-            // 
-            // btnThoat
-            // 
-            this.btnThoat.Location = new System.Drawing.Point(294, 160);
-            this.btnThoat.Name = "btnThoat";
-            this.btnThoat.Size = new System.Drawing.Size(74, 22);
-            this.btnThoat.StyleController = this.dataLayoutControl1;
-            this.btnThoat.TabIndex = 10;
-            this.btnThoat.Text = "Thoát";
-            this.btnThoat.Click += new System.EventHandler(this.btnThoat_Click);
             // 
             // layoutControlItem2
             // 
@@ -310,6 +316,30 @@ namespace FirefoxPortableAdmin.Views.QuanLyTaiKhoan
             this.emptySpaceItem3.Name = "emptySpaceItem3";
             this.emptySpaceItem3.Size = new System.Drawing.Size(140, 24);
             this.emptySpaceItem3.TextSize = new System.Drawing.Size(0, 0);
+            // 
+            // GioiHanLuotDownloadTextEdit
+            // 
+            this.GioiHanLuotDownloadTextEdit.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.taiKhoanCreateModelBindingSource, "GioiHanLuotDownload", true));
+            this.GioiHanLuotDownloadTextEdit.Location = new System.Drawing.Point(133, 108);
+            this.GioiHanLuotDownloadTextEdit.Name = "GioiHanLuotDownloadTextEdit";
+            this.GioiHanLuotDownloadTextEdit.Properties.BeepOnError = false;
+            this.GioiHanLuotDownloadTextEdit.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.NumericMaskManager));
+            this.GioiHanLuotDownloadTextEdit.Properties.MaskSettings.Set("MaskManagerSignature", "allowNull=False");
+            this.GioiHanLuotDownloadTextEdit.Properties.MaskSettings.Set("mask", "d");
+            this.GioiHanLuotDownloadTextEdit.Properties.UseMaskAsDisplayFormat = true;
+            this.GioiHanLuotDownloadTextEdit.Size = new System.Drawing.Size(235, 20);
+            this.GioiHanLuotDownloadTextEdit.StyleController = this.dataLayoutControl1;
+            this.GioiHanLuotDownloadTextEdit.TabIndex = 11;
+            // 
+            // ItemForGioiHanLuotDownload
+            // 
+            this.ItemForGioiHanLuotDownload.Control = this.GioiHanLuotDownloadTextEdit;
+            this.ItemForGioiHanLuotDownload.CustomizationFormText = "Giới hạn lượt download";
+            this.ItemForGioiHanLuotDownload.Location = new System.Drawing.Point(0, 96);
+            this.ItemForGioiHanLuotDownload.Name = "ItemForGioiHanLuotDownload";
+            this.ItemForGioiHanLuotDownload.Size = new System.Drawing.Size(360, 24);
+            this.ItemForGioiHanLuotDownload.Text = "Giới hạn lượt download";
+            this.ItemForGioiHanLuotDownload.TextSize = new System.Drawing.Size(109, 13);
             // 
             // taiKhoanCreateModelBindingSource
             // 
@@ -353,6 +383,8 @@ namespace FirefoxPortableAdmin.Views.QuanLyTaiKhoan
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GioiHanLuotDownloadTextEdit.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemForGioiHanLuotDownload)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.taiKhoanCreateModelBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.linkDownloadProfileSearchModelBindingSource)).EndInit();
             this.ResumeLayout(false);
@@ -384,5 +416,7 @@ namespace FirefoxPortableAdmin.Views.QuanLyTaiKhoan
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem2;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem3;
+        private DevExpress.XtraEditors.TextEdit GioiHanLuotDownloadTextEdit;
+        private DevExpress.XtraLayout.LayoutControlItem ItemForGioiHanLuotDownload;
     }
 }

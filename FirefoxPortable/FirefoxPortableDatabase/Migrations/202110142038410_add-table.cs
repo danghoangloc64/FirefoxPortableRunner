@@ -3,7 +3,7 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class init : DbMigration
+    public partial class addtable : DbMigration
     {
         public override void Up()
         {
@@ -32,6 +32,9 @@
                         NgayHetHan = c.DateTime(),
                         Actived = c.Boolean(nullable: false),
                         DiskSerial = c.String(),
+                        NgayKichHoat = c.DateTime(),
+                        GioiHanLuotDownload = c.Int(nullable: false),
+                        SoLuotDaDownload = c.Int(nullable: false),
                         Deleted = c.Boolean(nullable: false),
                         CreatedDate = c.DateTime(nullable: false),
                         CreatedBy = c.String(),

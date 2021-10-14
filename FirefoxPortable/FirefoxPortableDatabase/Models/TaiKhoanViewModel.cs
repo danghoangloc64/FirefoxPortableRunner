@@ -19,6 +19,9 @@ namespace FirefoxPortableDatabase.Models
             DiskSerial = data.DiskSerial;
             TenLinkDownloadProfile = data.LinkDownloadProfile?.TenLinkDownloadProfile;
             LinkLinkDownloadProfile = data.LinkDownloadProfile?.LinkLinkDownloadProfile;
+            NgayKichHoat = data.NgayKichHoat;
+            SoLuotDaDownload = data.SoLuotDaDownload;
+            GioiHanLuotDownload = data.GioiHanLuotDownload;
             CreatedDate = data.CreatedDate;
             UpdatedDate = data.UpdatedDate;
         }
@@ -46,6 +49,15 @@ namespace FirefoxPortableDatabase.Models
 
         [DisplayName("Link profile")]
         public string LinkLinkDownloadProfile { get; set; }
+
+        [DisplayName("Ngày kích hoạt")]
+        public DateTime? NgayKichHoat { get; set; }
+
+        [DisplayName("Giới hạn lượt download")]
+        public int GioiHanLuotDownload { get; set; }
+
+        [DisplayName("Số lượt đã download")]
+        public int SoLuotDaDownload { get; set; }
 
         [DisplayName("Ngày tạo")]
         public DateTime CreatedDate { get; set; }

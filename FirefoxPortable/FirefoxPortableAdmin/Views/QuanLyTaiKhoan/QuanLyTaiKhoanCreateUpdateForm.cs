@@ -52,10 +52,7 @@ namespace FirefoxPortableAdmin.Views.QuanLyTaiKhoan
 
         private void QuanLyTaiKhoanCreateUpdateForm_Load(object sender, EventArgs e)
         {
-            //m_objLinkDownloadProfileBLL = new LinkDownloadProfileBLL();
-            //m_objLinkDownloadProfileSearchModel = m_objLinkDownloadProfileBLL.GetListSearchModel();
-            //linkDownloadProfileSearchModelBindingSource.DataSource = m_objLinkDownloadProfileSearchModel;
-
+         
         }
 
         private void btnThoat_Click(object sender, EventArgs e)

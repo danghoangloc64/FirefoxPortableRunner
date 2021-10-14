@@ -31,5 +31,8 @@ namespace FirefoxPortableDatabase.Models
 
         [DisplayName("Link profile")]
         public string LinkLinkDownloadProfile { get; set; }
+
+        [DisplayName("Giới hạn lượt download")]
+        public int GioiHanLuotDownload { get; set; }
     }
 }

@@ -7,13 +7,13 @@ namespace FirefoxPortableDatabase.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class init : IMigrationMetadata
+    public sealed partial class addtable : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(init));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(addtable));
         
         string IMigrationMetadata.Id
         {
-            get { return "202110141606147_init"; }
+            get { return "202110142038410_add-table"; }
         }
         
         string IMigrationMetadata.Source

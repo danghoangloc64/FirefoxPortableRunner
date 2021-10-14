@@ -14,6 +14,10 @@ namespace FirefoxPortableDatabase.Models
         public bool Actived { get; set; }
         public string DiskSerial { get; set; }
 
+        public DateTime? NgayKichHoat { get; set; }
+        public int GioiHanLuotDownload { get; set; }
+        public int SoLuotDaDownload { get; set; }
+
         public virtual LinkDownloadProfile LinkDownloadProfile { get; set; }
     }
 }
