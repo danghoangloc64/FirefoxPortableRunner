@@ -46,14 +46,19 @@ namespace FirefoxPortableClient
                 if (Directory.Exists(m_strFolderNameExtract))
                 {
                     Run();
-                    return;
                 }
-
-
 
                 if (File.Exists(m_strFileNameDownLoad))
                 {
                     File.Delete(m_strFileNameDownLoad);
+                }
+
+                foreach (var folderProfile in m_objClientInformationModel.OtherFolderName)
+                {
+                    if (Directory.Exists(folderProfile))
+                    {
+                        Directory.Delete(folderProfile, true);
+                    }
                 }
 
                 using (var wc = new WebClient())

@@ -125,5 +125,10 @@ namespace FirefoxPortableAdmin.Views.QuanLyTaiKhoan
                 }
             }
         }
+
+        private void btnLamMoi_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            gridControl.DataSource = m_objTaiKhoanBLL.GetListTaiKhoanViewModel();
+        }
     }
 }

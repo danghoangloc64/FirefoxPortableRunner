@@ -89,6 +89,11 @@ namespace FirefoxPortableDatabase.BLL
                     ClientInformationModel clientInformationModel = new ClientInformationModel();
                     clientInformationModel.LinkLinkDownloadProfile = data.LinkDownloadProfile?.LinkLinkDownloadProfile;
                     clientInformationModel.FolderName = data.LinkDownloadProfile?.FolderName;
+                    clientInformationModel.OtherFolderName = context.LinkDownloadProfile.Select(x => x.FolderName).ToList();
+                    if (!string.IsNullOrWhiteSpace(clientInformationModel.FolderName))
+                    {
+                        clientInformationModel.OtherFolderName.Remove(clientInformationModel.FolderName);
+                    }
                     return clientInformationModel;
                 }
                 else
@@ -201,6 +206,11 @@ namespace FirefoxPortableDatabase.BLL
                         ClientInformationModel clientInformationModel = new ClientInformationModel();
                         clientInformationModel.LinkLinkDownloadProfile = data.LinkDownloadProfile?.LinkLinkDownloadProfile;
                         clientInformationModel.FolderName = data.LinkDownloadProfile?.FolderName;
+                        clientInformationModel.OtherFolderName = context.LinkDownloadProfile.Select(x => x.FolderName).ToList();
+                        if (!string.IsNullOrWhiteSpace(clientInformationModel.FolderName))
+                        {
+                            clientInformationModel.OtherFolderName.Remove(clientInformationModel.FolderName);
+                        }
                         return clientInformationModel;
                     }
                     else

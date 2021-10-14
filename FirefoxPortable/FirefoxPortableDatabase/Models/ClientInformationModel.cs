@@ -10,5 +10,6 @@ namespace FirefoxPortableDatabase.Models
     {
         public string LinkLinkDownloadProfile { get; set; }
         public string FolderName { get; set; }
+        public List<string> OtherFolderName { get; set; }
     }
 }

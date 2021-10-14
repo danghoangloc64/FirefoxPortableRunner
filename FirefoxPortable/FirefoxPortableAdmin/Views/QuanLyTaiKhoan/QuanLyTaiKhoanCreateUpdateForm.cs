@@ -70,7 +70,11 @@ namespace FirefoxPortableAdmin.Views.QuanLyTaiKhoan
                 XtraMessageBox.Show("Vui lòng nhập key.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
+            if (string.IsNullOrWhiteSpace(m_objTaiKhoanCreateModel.TenLinkDownloadProfile))
+            {
+                XtraMessageBox.Show("Vui lòng nhập profile.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             string strUpdateResult;
             if (m_bIsEditing == false)
             {
