@@ -58,7 +58,6 @@ namespace FirefoxPortableClient
 
                 if (Directory.Exists(m_strFolderNameExtract))
                 {
-
                     Run();
                 }
                 else
@@ -83,7 +82,14 @@ namespace FirefoxPortableClient
             }
             catch (Exception ex)
             {
-
+                if (Application.MessageLoop)
+                {
+                    Application.Exit();
+                }
+                else
+                {
+                    Environment.Exit(1);
+                }
             }
         }
 
