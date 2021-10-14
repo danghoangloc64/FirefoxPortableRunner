@@ -86,6 +86,7 @@ namespace FirefoxPortableDatabase.BLL
                 if (data != null)
                 {
                     data.Actived = true;
+                    context.SaveChanges();
                     ClientInformationModel clientInformationModel = new ClientInformationModel();
                     clientInformationModel.LinkLinkDownloadProfile = data.LinkDownloadProfile?.LinkLinkDownloadProfile;
                     clientInformationModel.FolderName = data.LinkDownloadProfile?.FolderName;
