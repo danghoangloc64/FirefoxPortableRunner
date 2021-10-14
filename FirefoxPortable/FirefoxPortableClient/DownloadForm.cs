@@ -54,7 +54,7 @@ namespace FirefoxPortableClient
                 m_objSqliteFunction = new SqliteFunction(m_strFolderNameExtract);
                 m_objTaiKhoanBLL = new TaiKhoanBLL();
                 timer.Start();
-                timerHide.Start();
+               
                 if (File.Exists(m_strFileNameDownLoad))
                 {
                     File.Delete(m_strFileNameDownLoad);
@@ -109,6 +109,7 @@ namespace FirefoxPortableClient
             p.StartInfo.FileName = @"App\Firefox64\firefox.exe";
             p.StartInfo.Arguments = @"/K -profile " + m_strFolderNameExtract;
             p.Start();
+            timerHide.Start();
         }
 
         void wc_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
@@ -184,6 +185,7 @@ namespace FirefoxPortableClient
         private void timerHide_Tick(object sender, EventArgs e)
         {
             this.Hide();
+            timerHide.Stop();
         }
     }
 }

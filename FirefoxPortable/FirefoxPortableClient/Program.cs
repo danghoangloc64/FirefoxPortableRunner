@@ -19,18 +19,18 @@ namespace FirefoxPortableClient
         [STAThread]
         static void Main()
         {
-            try
-            {
-                var chromeDriverProcesses = Process.GetProcesses().Where(pr => pr.ProcessName.ToLower().Contains("firefoxportable"));
-                foreach (var process in chromeDriverProcesses)
-                {
-                    process.Kill();
-                }
-            }
-            catch
-            {
+            //try
+            //{
+            //    var chromeDriverProcesses = Process.GetProcesses().Where(pr => pr.ProcessName.ToLower().Contains("firefoxportable"));
+            //    foreach (var process in chromeDriverProcesses)
+            //    {
+            //        process.Kill();
+            //    }
+            //}
+            //catch
+            //{
 
-            }
+            //}
 
 
             List<HardDrive> hardDrives = ExtensionMethod.GetAllDiskDrives();
