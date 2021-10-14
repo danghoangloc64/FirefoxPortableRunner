@@ -1,5 +1,6 @@
 ﻿using DevExpress.XtraEditors;
 using DevExpress.XtraSplashScreen;
+using FirefoxPortableAdmin.Views.QuanLyProfile;
 using FirefoxPortableAdmin.Views.QuanLyTaiKhoan;
 using FirefoxPortableDatabase.BLL;
 using System;
@@ -59,6 +60,14 @@ namespace FirefoxPortableAdmin
         {
             m_objTaiKhoanBLL = new TaiKhoanBLL();
             m_objTaiKhoanBLL.FirstLoadFirefoxPortableDatabaseContext();
+        }
+
+        private void btnProfile_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+    SplashScreenManager.ShowForm(this, typeof(ProgressForm), true, true, false);
+            SplashScreenManager.Default.SetWaitFormCaption("Xin vui lòng chờ...");
+            AddTab("Quản lý profile", new QuanLyProfileUserControl());
+            SplashScreenManager.CloseForm();
         }
     }
 }

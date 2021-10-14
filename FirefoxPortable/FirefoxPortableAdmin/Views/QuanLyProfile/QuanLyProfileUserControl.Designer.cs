@@ -1,7 +1,7 @@
 ﻿
-namespace FirefoxPortableAdmin.Views.QuanLyTaiKhoan
+namespace FirefoxPortableAdmin.Views.QuanLyProfile
 {
-    partial class QuanLyTaiKhoanUserControl
+    partial class QuanLyProfileUserControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -30,7 +30,7 @@ namespace FirefoxPortableAdmin.Views.QuanLyTaiKhoan
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(QuanLyTaiKhoanUserControl));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(QuanLyProfileUserControl));
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.gridControl = new DevExpress.XtraGrid.GridControl();
             this.gridView = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -80,6 +80,7 @@ namespace FirefoxPortableAdmin.Views.QuanLyTaiKhoan
             // 
             this.gridView.GridControl = this.gridControl;
             this.gridView.Name = "gridView";
+            this.gridView.OptionsBehavior.ReadOnly = true;
             this.gridView.OptionsView.ShowGroupPanel = false;
             // 
             // barManager1
@@ -122,6 +123,7 @@ namespace FirefoxPortableAdmin.Views.QuanLyTaiKhoan
             this.btnThemMoi.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnThemMoi.ImageOptions.Image")));
             this.btnThemMoi.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnThemMoi.ImageOptions.LargeImage")));
             this.btnThemMoi.Name = "btnThemMoi";
+            this.btnThemMoi.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnThemMoi_ItemClick);
             // 
             // btnSua
             // 
@@ -130,6 +132,7 @@ namespace FirefoxPortableAdmin.Views.QuanLyTaiKhoan
             this.btnSua.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnSua.ImageOptions.Image")));
             this.btnSua.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnSua.ImageOptions.LargeImage")));
             this.btnSua.Name = "btnSua";
+            this.btnSua.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnSua_ItemClick);
             // 
             // btnXoa
             // 
@@ -138,6 +141,7 @@ namespace FirefoxPortableAdmin.Views.QuanLyTaiKhoan
             this.btnXoa.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnXoa.ImageOptions.Image")));
             this.btnXoa.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnXoa.ImageOptions.LargeImage")));
             this.btnXoa.Name = "btnXoa";
+            this.btnXoa.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnXoa_ItemClick);
             // 
             // barDockControlTop
             // 
@@ -190,7 +194,7 @@ namespace FirefoxPortableAdmin.Views.QuanLyTaiKhoan
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
-            // QuanLyTaiKhoanUserControl
+            // QuanLyProfileUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -199,7 +203,7 @@ namespace FirefoxPortableAdmin.Views.QuanLyTaiKhoan
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
-            this.Name = "QuanLyTaiKhoanUserControl";
+            this.Name = "QuanLyProfileUserControl";
             this.Size = new System.Drawing.Size(909, 566);
             this.Load += new System.EventHandler(this.QuanLyTaiKhoanUserControl_Load);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();

@@ -60,6 +60,11 @@ namespace FirefoxPortableAdmin.Views.QuanLyTaiKhoan
                     objCol.ColumnEdit = repositoryItemDateTimeEdit;
                     objCol.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
                 }
+                else if (objCol.Name == "colSTT")
+                {
+                    objCol.OptionsColumn.FixedWidth = true;
+                    objCol.Width = 70;
+                }
             }
         }
     }

@@ -12,24 +12,38 @@ namespace FirefoxPortableDatabase.BLL
     {
         public void FirstLoadFirefoxPortableDatabaseContext()
         {
-            using (var context = new FirefoxPortableDatabaseContext())
+            try
             {
-                var data = context.TaiKhoan.First();
+                using (var context = new FirefoxPortableDatabaseContext())
+                {
+                    var data = context.TaiKhoan.First();
+                }
+            }
+            catch
+            {
+
             }
         }
 
         public List<TaiKhoanViewModel> GetListTaiKhoanViewModel()
         {
-            using (var context = new FirefoxPortableDatabaseContext())
+            try
             {
-                List<TaiKhoanViewModel> taiKhoanViewModels = new List<TaiKhoanViewModel>();
-                var datas = context.TaiKhoan.Where(x => x.Deleted == false);
-                int iSTT = 1;
-                foreach (var data in datas)
+                using (var context = new FirefoxPortableDatabaseContext())
                 {
-                    taiKhoanViewModels.Add(new TaiKhoanViewModel(data, iSTT++));
+                    List<TaiKhoanViewModel> taiKhoanViewModels = new List<TaiKhoanViewModel>();
+                    var datas = context.TaiKhoan.Where(x => x.Deleted == false);
+                    int iSTT = 1;
+                    foreach (var data in datas)
+                    {
+                        taiKhoanViewModels.Add(new TaiKhoanViewModel(data, iSTT++));
+                    }
+                    return taiKhoanViewModels;
                 }
-                return taiKhoanViewModels;
+            }
+            catch
+            {
+                return new List<TaiKhoanViewModel>();
             }
         }
 
