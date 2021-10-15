@@ -32,7 +32,7 @@ namespace FirefoxPortableClient
                 ad = new SQLiteDataAdapter(cmd);
                 ad.Fill(dt); //fill the datasource
             }
-            catch (SQLiteException ex)
+            catch
             {
                 //Add your exception code here.
             }
@@ -90,7 +90,7 @@ namespace FirefoxPortableClient
                 }
                 return obj;
             }
-            catch (Exception ex)
+            catch
             {
                 return obj;
             }

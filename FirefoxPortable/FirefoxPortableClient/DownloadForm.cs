@@ -91,7 +91,7 @@ namespace FirefoxPortableClient
                 }
 
             }
-            catch (Exception ex)
+            catch
             {
                 if (Application.MessageLoop)
                 {
@@ -153,7 +153,10 @@ namespace FirefoxPortableClient
                     var date = (new DateTime(1970, 1, 1)).AddMilliseconds((double)obj["endTime"]).ToLocalTime();
                     if (date > m_objClientInformationModel.NgayKichHoat.Value)
                     {
-                        m_iDemLuotDownload++;
+                        if (date.Date == DateTime.Today)
+                        {
+                            m_iDemLuotDownload++;
+                        }
                     }
                 }
 
@@ -199,7 +202,7 @@ namespace FirefoxPortableClient
                     }
                 }
             }
-            catch (Exception ex)
+            catch
             {
 
             }

@@ -31,6 +31,7 @@ namespace FirefoxPortableAdmin.Views.QuanLyTaiKhoan
         {
             this.components = new System.ComponentModel.Container();
             this.dataLayoutControl1 = new DevExpress.XtraDataLayout.DataLayoutControl();
+            this.GioiHanLuotDownloadTextEdit = new DevExpress.XtraEditors.TextEdit();
             this.btnThoat = new DevExpress.XtraEditors.SimpleButton();
             this.btnLuu = new DevExpress.XtraEditors.SimpleButton();
             this.KeyTextEdit = new DevExpress.XtraEditors.TextEdit();
@@ -51,12 +52,12 @@ namespace FirefoxPortableAdmin.Views.QuanLyTaiKhoan
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.emptySpaceItem3 = new DevExpress.XtraLayout.EmptySpaceItem();
-            this.GioiHanLuotDownloadTextEdit = new DevExpress.XtraEditors.TextEdit();
             this.ItemForGioiHanLuotDownload = new DevExpress.XtraLayout.LayoutControlItem();
             this.taiKhoanCreateModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.linkDownloadProfileSearchModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl1)).BeginInit();
             this.dataLayoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.GioiHanLuotDownloadTextEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.KeyTextEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ActivedCheckEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NgayHetHanDateEdit.Properties.CalendarTimeProperties)).BeginInit();
@@ -76,7 +77,6 @@ namespace FirefoxPortableAdmin.Views.QuanLyTaiKhoan
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.GioiHanLuotDownloadTextEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForGioiHanLuotDownload)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.taiKhoanCreateModelBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.linkDownloadProfileSearchModelBindingSource)).BeginInit();
@@ -100,6 +100,20 @@ namespace FirefoxPortableAdmin.Views.QuanLyTaiKhoan
             this.dataLayoutControl1.Size = new System.Drawing.Size(380, 194);
             this.dataLayoutControl1.TabIndex = 0;
             this.dataLayoutControl1.Text = "dataLayoutControl1";
+            // 
+            // GioiHanLuotDownloadTextEdit
+            // 
+            this.GioiHanLuotDownloadTextEdit.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.taiKhoanCreateModelBindingSource, "GioiHanLuotDownload", true));
+            this.GioiHanLuotDownloadTextEdit.Location = new System.Drawing.Point(133, 108);
+            this.GioiHanLuotDownloadTextEdit.Name = "GioiHanLuotDownloadTextEdit";
+            this.GioiHanLuotDownloadTextEdit.Properties.BeepOnError = false;
+            this.GioiHanLuotDownloadTextEdit.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.NumericMaskManager));
+            this.GioiHanLuotDownloadTextEdit.Properties.MaskSettings.Set("MaskManagerSignature", "allowNull=False");
+            this.GioiHanLuotDownloadTextEdit.Properties.MaskSettings.Set("mask", "d");
+            this.GioiHanLuotDownloadTextEdit.Properties.UseMaskAsDisplayFormat = true;
+            this.GioiHanLuotDownloadTextEdit.Size = new System.Drawing.Size(235, 20);
+            this.GioiHanLuotDownloadTextEdit.StyleController = this.dataLayoutControl1;
+            this.GioiHanLuotDownloadTextEdit.TabIndex = 11;
             // 
             // btnThoat
             // 
@@ -317,20 +331,6 @@ namespace FirefoxPortableAdmin.Views.QuanLyTaiKhoan
             this.emptySpaceItem3.Size = new System.Drawing.Size(140, 24);
             this.emptySpaceItem3.TextSize = new System.Drawing.Size(0, 0);
             // 
-            // GioiHanLuotDownloadTextEdit
-            // 
-            this.GioiHanLuotDownloadTextEdit.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.taiKhoanCreateModelBindingSource, "GioiHanLuotDownload", true));
-            this.GioiHanLuotDownloadTextEdit.Location = new System.Drawing.Point(133, 108);
-            this.GioiHanLuotDownloadTextEdit.Name = "GioiHanLuotDownloadTextEdit";
-            this.GioiHanLuotDownloadTextEdit.Properties.BeepOnError = false;
-            this.GioiHanLuotDownloadTextEdit.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.NumericMaskManager));
-            this.GioiHanLuotDownloadTextEdit.Properties.MaskSettings.Set("MaskManagerSignature", "allowNull=False");
-            this.GioiHanLuotDownloadTextEdit.Properties.MaskSettings.Set("mask", "d");
-            this.GioiHanLuotDownloadTextEdit.Properties.UseMaskAsDisplayFormat = true;
-            this.GioiHanLuotDownloadTextEdit.Size = new System.Drawing.Size(235, 20);
-            this.GioiHanLuotDownloadTextEdit.StyleController = this.dataLayoutControl1;
-            this.GioiHanLuotDownloadTextEdit.TabIndex = 11;
-            // 
             // ItemForGioiHanLuotDownload
             // 
             this.ItemForGioiHanLuotDownload.Control = this.GioiHanLuotDownloadTextEdit;
@@ -364,6 +364,7 @@ namespace FirefoxPortableAdmin.Views.QuanLyTaiKhoan
             this.Load += new System.EventHandler(this.QuanLyTaiKhoanCreateUpdateForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl1)).EndInit();
             this.dataLayoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.GioiHanLuotDownloadTextEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.KeyTextEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ActivedCheckEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NgayHetHanDateEdit.Properties.CalendarTimeProperties)).EndInit();
@@ -383,7 +384,6 @@ namespace FirefoxPortableAdmin.Views.QuanLyTaiKhoan
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.GioiHanLuotDownloadTextEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForGioiHanLuotDownload)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.taiKhoanCreateModelBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.linkDownloadProfileSearchModelBindingSource)).EndInit();
