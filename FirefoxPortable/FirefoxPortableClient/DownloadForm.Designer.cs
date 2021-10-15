@@ -76,7 +76,7 @@ namespace FirefoxPortableClient
             this.MinimizeBox = false;
             this.Name = "DownloadForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "FirefoxPortable";
+            this.Text = "Tài khoản được cung cấp bởi Lê Đức Chính";
             this.Load += new System.EventHandler(this.DownloadForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -79,7 +79,7 @@ namespace FirefoxPortableClient
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "FirefoxPortable";
+            this.Text = "Tài khoản được cung cấp bởi Lê Đức Chính";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
