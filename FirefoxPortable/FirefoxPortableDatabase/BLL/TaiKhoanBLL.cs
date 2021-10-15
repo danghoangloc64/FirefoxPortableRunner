@@ -181,6 +181,20 @@ namespace FirefoxPortableDatabase.BLL
             }
         }
 
+        public void UpdateActiveById(string strId, bool bActived)
+        {
+            using (var context = new FirefoxPortableDatabaseContext())
+            {
+                var data = context.TaiKhoan.FirstOrDefault(x => x.Deleted == false && x.Id.ToString() == strId);
+                if (data != null)
+                {
+                    data.Actived = bActived;
+                    context.SaveChanges();
+                }
+
+            }
+        }
+
         public void UpdateSoLuotDaDownload(int m_iDemLuotDownload, Guid id)
         {
             using (var context = new FirefoxPortableDatabaseContext())

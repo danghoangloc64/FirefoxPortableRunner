@@ -64,6 +64,12 @@ namespace FirefoxPortableAdmin.Views.QuanLyTaiKhoan
                     objCol.OptionsColumn.FixedWidth = true;
                     objCol.Width = 300;
                 }
+
+                if (!objCol.Name.Contains("Actived"))
+                {
+                    objCol.OptionsColumn.ReadOnly = true;
+                }
+
                 gridView.Columns[0].Visible = false;
                 gridView.Columns[5].Visible = false;
             }
@@ -129,6 +135,85 @@ namespace FirefoxPortableAdmin.Views.QuanLyTaiKhoan
         private void btnLamMoi_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             gridControl.DataSource = m_objTaiKhoanBLL.GetListTaiKhoanViewModel();
+        }
+
+        private void gridView_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
+        {
+            //try
+            //{
+            //    gridView.CellValueChanged -= new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.gridView_CellValueChanged);
+            //    if (e.Column.FieldName == "Actived")
+            //    {
+            //        var objActived = gridView.GetRowCellValue(e.RowHandle, e.Column);
+            //        if (objActived != null)
+            //        {
+            //            bool bActived = Convert.ToBoolean(objActived.ToString());
+            //            string strId = GetSelectedId();
+            //            if (!string.IsNullOrWhiteSpace(strId))
+            //            {
+            //                m_objTaiKhoanBLL.UpdateActiveById(strId, bActived);
+            //            }
+            //        }
+            //    }
+            //    gridView.CellValueChanged += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.gridView_CellValueChanged);
+            //}
+            //catch
+            //{
+
+            //}
+        }
+
+        private void gridView_CellValueChanging(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
+        {
+            try
+            {
+              //  gridView.CellValueChanging -= new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.gridView_CellValueChanging);
+                if (e.Column.FieldName == "Actived")
+                {
+                    gridView.PostEditor();
+                    var objActived = gridView.GetRowCellValue(e.RowHandle, e.Column);
+                    if (objActived != null)
+                    {
+                        bool bActived = !Convert.ToBoolean(objActived.ToString());
+                        string strId = GetSelectedId();
+                        if (!string.IsNullOrWhiteSpace(strId))
+                        {
+                            m_objTaiKhoanBLL.UpdateActiveById(strId, bActived);
+                        }
+                    }
+                }
+               // gridView.CellValueChanging += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.gridView_CellValueChanging);
+            }
+            catch
+            {
+
+            }
+        }
+
+        private void gridView_RowCellClick(object sender, DevExpress.XtraGrid.Views.Grid.RowCellClickEventArgs e)
+        {
+            //try
+            //{
+            //    this.gridView.RowCellClick -= new DevExpress.XtraGrid.Views.Grid.RowCellClickEventHandler(this.gridView_RowCellClick);
+            //    if (e.Column.FieldName == "Actived")
+            //    {
+            //        var objActived = gridView.GetRowCellValue(e.RowHandle, e.Column);
+            //        if (objActived != null)
+            //        {
+            //            bool bActived = !Convert.ToBoolean(objActived.ToString());
+            //            string strId = GetSelectedId();
+            //            if (!string.IsNullOrWhiteSpace(strId))
+            //            {
+            //                m_objTaiKhoanBLL.UpdateActiveById(strId, bActived);
+            //            }
+            //        }
+            //    }
+            //    this.gridView.RowCellClick += new DevExpress.XtraGrid.Views.Grid.RowCellClickEventHandler(this.gridView_RowCellClick);
+            //}
+            //catch
+            //{
+
+            //}
         }
     }
 }

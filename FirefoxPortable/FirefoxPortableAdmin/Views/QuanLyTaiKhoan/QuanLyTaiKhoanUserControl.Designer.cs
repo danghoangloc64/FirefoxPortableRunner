@@ -81,8 +81,10 @@ namespace FirefoxPortableAdmin.Views.QuanLyTaiKhoan
             // 
             this.gridView.GridControl = this.gridControl;
             this.gridView.Name = "gridView";
-            this.gridView.OptionsBehavior.ReadOnly = true;
             this.gridView.OptionsView.ShowGroupPanel = false;
+            this.gridView.RowCellClick += new DevExpress.XtraGrid.Views.Grid.RowCellClickEventHandler(this.gridView_RowCellClick);
+            this.gridView.CellValueChanged += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.gridView_CellValueChanged);
+            this.gridView.CellValueChanging += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.gridView_CellValueChanging);
             // 
             // barManager1
             // 
@@ -150,8 +152,8 @@ namespace FirefoxPortableAdmin.Views.QuanLyTaiKhoan
             // 
             this.btnLamMoi.Caption = "Làm mới dữ liệu";
             this.btnLamMoi.Id = 3;
-            this.btnLamMoi.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem1.ImageOptions.Image")));
-            this.btnLamMoi.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem1.ImageOptions.LargeImage")));
+            this.btnLamMoi.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnLamMoi.ImageOptions.Image")));
+            this.btnLamMoi.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnLamMoi.ImageOptions.LargeImage")));
             this.btnLamMoi.Name = "btnLamMoi";
             this.btnLamMoi.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnLamMoi_ItemClick);
             // 
