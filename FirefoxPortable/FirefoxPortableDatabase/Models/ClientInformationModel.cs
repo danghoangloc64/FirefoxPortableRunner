@@ -10,6 +10,7 @@ namespace FirefoxPortableDatabase.Models
     {
         public Guid Id { get; set; }
         public string LinkLinkDownloadProfile { get; set; }
+        public bool Actived { get; set; }
         public string FolderName { get; set; }
         public List<string> OtherFolderName { get; set; }
         public int GioiHanLuotDownload { get; set; }

@@ -37,7 +37,7 @@ namespace FirefoxPortableClient
                 }
                 else
                 {
-                    DownloadForm downloadForm = new DownloadForm(clientInformationModel);
+                    DownloadForm downloadForm = new DownloadForm(clientInformationModel, true);
                     this.Hide();
                     downloadForm.Show();
                 }

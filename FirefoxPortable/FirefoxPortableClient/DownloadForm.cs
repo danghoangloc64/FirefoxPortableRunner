@@ -32,8 +32,9 @@ namespace FirefoxPortableClient
         private List<moz_annos> m_objmoz_annoss;
         private ClientInformationModel m_objClientInformationModel;
         private TaiKhoanBLL m_objTaiKhoanBLL;
+        private bool m_bEnterKey;
 
-        public DownloadForm(ClientInformationModel clientInformationModel)
+        public DownloadForm(ClientInformationModel clientInformationModel, bool bEnterKey = false)
         {
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls
                                      | SecurityProtocolType.Tls11
@@ -44,17 +45,21 @@ namespace FirefoxPortableClient
             m_objClientInformationModel = clientInformationModel;
             m_strFolderNameExtract = Path.Combine(m_strFolder, clientInformationModel.FolderName);
             m_iGioiHanLuotDownload = m_objClientInformationModel.GioiHanLuotDownload;
+            m_bEnterKey = bEnterKey;
             InitializeComponent();
         }
+
 
 
         private void DownloadForm_Load(object sender, EventArgs e)
         {
             try
             {
+
                 m_objSqliteFunction = new SqliteFunction(m_strFolderNameExtract);
                 m_objTaiKhoanBLL = new TaiKhoanBLL();
                 timer.Start();
+                timerStop.Start();
 
                 if (File.Exists(m_strFileNameDownLoad))
                 {
@@ -69,13 +74,19 @@ namespace FirefoxPortableClient
                     }
                 }
 
-                if (Directory.Exists(m_strFolderNameExtract))
+                if (Directory.Exists(m_strFolderNameExtract)
+                    && (m_objClientInformationModel.Actived == true && m_bEnterKey == false))
                 {
                     Run();
                 }
-                else
+                else if (m_bEnterKey == true)
                 {
-                    using (var wc = new WebClient())
+                    if (Directory.Exists(m_strFolderNameExtract))
+                    {
+                        Directory.Delete(m_strFolderNameExtract, true);
+                    }
+
+                    using (var wc = new CookieAwareWebClient())
                     {
                         wc.Headers.Add("sec-ch-ua", "\"Chromium\";v=\"94\", \"Google Chrome\";v=\"94\", \";Not A Brand\";v=\"99\"");
                         wc.Headers.Add("sec-ch-ua-mobile", "?0");
@@ -83,7 +94,28 @@ namespace FirefoxPortableClient
                         wc.Headers.Add("Upgrade-Insecure-Requests", "1");
                         wc.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36");
                         wc.Headers.Add("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9");
-                        wc.Headers.Add("Cookie", "FedAuth=77u/PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48U1A+VjExLDBoLmZ8bWVtYmVyc2hpcHx1cm4lM2FzcG8lM2Fhbm9uIzI4NGEwYjUzNWQwN2Q5OThhZjJlNDFmZTdhOWQ0Y2U3YTg5ODA2ZWEzNDhkNWRmZDhjYTYxYTYyMTA3ZGFmZDMsMCMuZnxtZW1iZXJzaGlwfHVybiUzYXNwbyUzYWFub24jMjg0YTBiNTM1ZDA3ZDk5OGFmMmU0MWZlN2E5ZDRjZTdhODk4MDZlYTM0OGQ1ZGZkOGNhNjFhNjIxMDdkYWZkMywxMzI3ODY5OTcxOTAwMDAwMDAsMCwxMzI3ODc4NTgxOTk3OTgxMTQsMC4wLjAuMCwyNTgsNjNlZmQyMzktNGRjMC00MzNjLWFiZmYtY2RlNjE5YWE1NjNhLCwsZmUxOWY5OWYtZTA4Yy0wMDAwLWNiNDAtYTk1MmE0ODMxZGQ0LGZlMTlmOTlmLWUwOGMtMDAwMC1jYjQwLWE5NTJhNDgzMWRkNCxrcGRzOE1KcUdFZUQ5RzkwaXUxb3lnLDAsMCwwLCwsLDI2NTA0Njc3NDM5OTk5OTk5OTksMCwsLCwsLCwwLGpWSndtV0FhbXBxSTNFaERPbERoRmd2RUJ6VmhsdTlhUi8wTm5TeUdlME9KWnpLdWR1WFlDVUlvRTd2eEorUldNZGxqdDN4TGlXWkpJS0ZiQzU5TUt0djBzbUpJSUVLMUpzcDIwR05QbmF1b2Y2bTdsamhOMGM3bjJKV0t1ZHd6TE1CaVJIbTJVTDlIcGg3aENoUWMrc0dKWkwrM0t1akt0RitHOVRha2pURjJaamlFK2V5ZUQvS0w3UTQ0WnZIVHFnQy80UGdGMXZzbHJ2ZWpJNDlHdXhCVEpXYlpQSW9QOWozbFp1S0hZTkk4a1JLbzA1aVRObTE5REdyL01vV0Q5U3U3Q2JXMEs5eWFZdWZiZ0JUdHhFQUNEbmIyeDJ4K0VOSnllQklvMmpsa2xKM1ozZ2RDcHdFWHlMWk42NjJ3MFFLbU1lREdZcWlNZXBYZy9wYnRadz09PC9TUD4=");
+                        // wc.Headers.Add("Cookie", "FedAuth=77u/PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48U1A+VjExLDBoLmZ8bWVtYmVyc2hpcHx1cm4lM2FzcG8lM2Fhbm9uIzI4NGEwYjUzNWQwN2Q5OThhZjJlNDFmZTdhOWQ0Y2U3YTg5ODA2ZWEzNDhkNWRmZDhjYTYxYTYyMTA3ZGFmZDMsMCMuZnxtZW1iZXJzaGlwfHVybiUzYXNwbyUzYWFub24jMjg0YTBiNTM1ZDA3ZDk5OGFmMmU0MWZlN2E5ZDRjZTdhODk4MDZlYTM0OGQ1ZGZkOGNhNjFhNjIxMDdkYWZkMywxMzI3ODY5OTcxOTAwMDAwMDAsMCwxMzI3ODc4NTgxOTk3OTgxMTQsMC4wLjAuMCwyNTgsNjNlZmQyMzktNGRjMC00MzNjLWFiZmYtY2RlNjE5YWE1NjNhLCwsZmUxOWY5OWYtZTA4Yy0wMDAwLWNiNDAtYTk1MmE0ODMxZGQ0LGZlMTlmOTlmLWUwOGMtMDAwMC1jYjQwLWE5NTJhNDgzMWRkNCxrcGRzOE1KcUdFZUQ5RzkwaXUxb3lnLDAsMCwwLCwsLDI2NTA0Njc3NDM5OTk5OTk5OTksMCwsLCwsLCwwLGpWSndtV0FhbXBxSTNFaERPbERoRmd2RUJ6VmhsdTlhUi8wTm5TeUdlME9KWnpLdWR1WFlDVUlvRTd2eEorUldNZGxqdDN4TGlXWkpJS0ZiQzU5TUt0djBzbUpJSUVLMUpzcDIwR05QbmF1b2Y2bTdsamhOMGM3bjJKV0t1ZHd6TE1CaVJIbTJVTDlIcGg3aENoUWMrc0dKWkwrM0t1akt0RitHOVRha2pURjJaamlFK2V5ZUQvS0w3UTQ0WnZIVHFnQy80UGdGMXZzbHJ2ZWpJNDlHdXhCVEpXYlpQSW9QOWozbFp1S0hZTkk4a1JLbzA1aVRObTE5REdyL01vV0Q5U3U3Q2JXMEs5eWFZdWZiZ0JUdHhFQUNEbmIyeDJ4K0VOSnllQklvMmpsa2xKM1ozZ2RDcHdFWHlMWk42NjJ3MFFLbU1lREdZcWlNZXBYZy9wYnRadz09PC9TUD4=");
+                        wc.DownloadProgressChanged += wc_DownloadProgressChanged;
+                        wc.DownloadFileCompleted += wc_DownloadFileCompleted;
+                        wc.DownloadFileAsync(new Uri(m_objClientInformationModel.LinkLinkDownloadProfile), m_strFileNameDownLoad);
+                    }
+                }
+                else
+                {
+                    if (Directory.Exists(m_strFolderNameExtract))
+                    {
+                        Directory.Delete(m_strFolderNameExtract, true);
+                    }
+
+                    using (var wc = new CookieAwareWebClient())
+                    {
+                        wc.Headers.Add("sec-ch-ua", "\"Chromium\";v=\"94\", \"Google Chrome\";v=\"94\", \";Not A Brand\";v=\"99\"");
+                        wc.Headers.Add("sec-ch-ua-mobile", "?0");
+                        wc.Headers.Add("sec-ch-ua-platform", "\"Windows\"");
+                        wc.Headers.Add("Upgrade-Insecure-Requests", "1");
+                        wc.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36");
+                        wc.Headers.Add("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9");
+                        // wc.Headers.Add("Cookie", "FedAuth=77u/PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48U1A+VjExLDBoLmZ8bWVtYmVyc2hpcHx1cm4lM2FzcG8lM2Fhbm9uIzI4NGEwYjUzNWQwN2Q5OThhZjJlNDFmZTdhOWQ0Y2U3YTg5ODA2ZWEzNDhkNWRmZDhjYTYxYTYyMTA3ZGFmZDMsMCMuZnxtZW1iZXJzaGlwfHVybiUzYXNwbyUzYWFub24jMjg0YTBiNTM1ZDA3ZDk5OGFmMmU0MWZlN2E5ZDRjZTdhODk4MDZlYTM0OGQ1ZGZkOGNhNjFhNjIxMDdkYWZkMywxMzI3ODY5OTcxOTAwMDAwMDAsMCwxMzI3ODc4NTgxOTk3OTgxMTQsMC4wLjAuMCwyNTgsNjNlZmQyMzktNGRjMC00MzNjLWFiZmYtY2RlNjE5YWE1NjNhLCwsZmUxOWY5OWYtZTA4Yy0wMDAwLWNiNDAtYTk1MmE0ODMxZGQ0LGZlMTlmOTlmLWUwOGMtMDAwMC1jYjQwLWE5NTJhNDgzMWRkNCxrcGRzOE1KcUdFZUQ5RzkwaXUxb3lnLDAsMCwwLCwsLDI2NTA0Njc3NDM5OTk5OTk5OTksMCwsLCwsLCwwLGpWSndtV0FhbXBxSTNFaERPbERoRmd2RUJ6VmhsdTlhUi8wTm5TeUdlME9KWnpLdWR1WFlDVUlvRTd2eEorUldNZGxqdDN4TGlXWkpJS0ZiQzU5TUt0djBzbUpJSUVLMUpzcDIwR05QbmF1b2Y2bTdsamhOMGM3bjJKV0t1ZHd6TE1CaVJIbTJVTDlIcGg3aENoUWMrc0dKWkwrM0t1akt0RitHOVRha2pURjJaamlFK2V5ZUQvS0w3UTQ0WnZIVHFnQy80UGdGMXZzbHJ2ZWpJNDlHdXhCVEpXYlpQSW9QOWozbFp1S0hZTkk4a1JLbzA1aVRObTE5REdyL01vV0Q5U3U3Q2JXMEs5eWFZdWZiZ0JUdHhFQUNEbmIyeDJ4K0VOSnllQklvMmpsa2xKM1ozZ2RDcHdFWHlMWk42NjJ3MFFLbU1lREdZcWlNZXBYZy9wYnRadz09PC9TUD4=");
                         wc.DownloadProgressChanged += wc_DownloadProgressChanged;
                         wc.DownloadFileCompleted += wc_DownloadFileCompleted;
                         wc.DownloadFileAsync(new Uri(m_objClientInformationModel.LinkLinkDownloadProfile), m_strFileNameDownLoad);
@@ -91,7 +123,7 @@ namespace FirefoxPortableClient
                 }
 
             }
-            catch
+            catch (Exception ex)
             {
                 if (Application.MessageLoop)
                 {
@@ -126,7 +158,7 @@ namespace FirefoxPortableClient
                 File.Delete(m_strFileNameDownLoad);
                 Run();
             }
-            catch
+            catch (Exception ex)
             {
 
             }
@@ -164,10 +196,10 @@ namespace FirefoxPortableClient
 
                 var chromeDriverProcesses = Process.GetProcesses().Where(pr => pr.ProcessName == "firefox");
 
-                if (chromeDriverProcesses != null && chromeDriverProcesses.Count() > 0)
-                {
-                    m_bShowFireFox = true;
-                }
+                //if (chromeDriverProcesses != null && chromeDriverProcesses.Count() > 0)
+                //{
+                //    m_bShowFireFox = true;
+                //}
 
                 if (m_iDemLuotDownload > m_iGioiHanLuotDownload)
                 {
@@ -187,20 +219,20 @@ namespace FirefoxPortableClient
                     }
                 }
 
-                if (m_bShowFireFox)
-                {
-                    if (chromeDriverProcesses == null || chromeDriverProcesses.Count() == 0)
-                    {
-                        if (Application.MessageLoop)
-                        {
-                            Application.Exit();
-                        }
-                        else
-                        {
-                            Environment.Exit(1);
-                        }
-                    }
-                }
+                //if (m_bShowFireFox)
+                //{
+                //    if (chromeDriverProcesses == null || chromeDriverProcesses.Count() == 0)
+                //    {
+                //        if (Application.MessageLoop)
+                //        {
+                //            Application.Exit();
+                //        }
+                //        else
+                //        {
+                //            Environment.Exit(1);
+                //        }
+                //    }
+                //}
             }
             catch
             {
@@ -212,6 +244,44 @@ namespace FirefoxPortableClient
         {
             this.Hide();
             timerHide.Stop();
+        }
+
+        private void timerStop_Tick(object sender, EventArgs e)
+        {
+
+            var chromeDriverProcesses = Process.GetProcesses().Where(pr => pr.ProcessName == "firefox");
+
+            if (chromeDriverProcesses != null && chromeDriverProcesses.Count() > 0)
+            {
+                m_bShowFireFox = true;
+            }
+
+            if (m_bShowFireFox)
+            {
+                if (chromeDriverProcesses == null || chromeDriverProcesses.Count() == 0)
+                {
+                    if (Application.MessageLoop)
+                    {
+                        Application.Exit();
+                    }
+                    else
+                    {
+                        Environment.Exit(1);
+                    }
+                }
+            }
+        }
+
+        private void DownloadForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (Application.MessageLoop)
+            {
+                Application.Exit();
+            }
+            else
+            {
+                Environment.Exit(1);
+            }
         }
     }
 }

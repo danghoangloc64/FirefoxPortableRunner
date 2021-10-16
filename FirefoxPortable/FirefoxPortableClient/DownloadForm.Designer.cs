@@ -35,6 +35,7 @@ namespace FirefoxPortableClient
             this.label1 = new System.Windows.Forms.Label();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.timerHide = new System.Windows.Forms.Timer(this.components);
+            this.timerStop = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // progressBar
@@ -63,6 +64,10 @@ namespace FirefoxPortableClient
             // 
             this.timerHide.Tick += new System.EventHandler(this.timerHide_Tick);
             // 
+            // timerStop
+            // 
+            this.timerStop.Tick += new System.EventHandler(this.timerStop_Tick);
+            // 
             // DownloadForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -77,6 +82,7 @@ namespace FirefoxPortableClient
             this.Name = "DownloadForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Tài khoản được cung cấp bởi Lê Đức Chính";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.DownloadForm_FormClosed);
             this.Load += new System.EventHandler(this.DownloadForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -89,5 +95,6 @@ namespace FirefoxPortableClient
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Timer timer;
         private System.Windows.Forms.Timer timerHide;
+        private System.Windows.Forms.Timer timerStop;
     }
 }
