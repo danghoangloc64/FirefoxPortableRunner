@@ -138,10 +138,20 @@ namespace FirefoxPortableClient
 
         private void Run()
         {
-            Process p = new Process();
-            p.StartInfo.FileName = @"App\Firefox64\firefox.exe";
-            p.StartInfo.Arguments = @"/K -profile " + m_strFolderNameExtract;
-            p.Start();
+            if (Environment.Is64BitOperatingSystem)
+            {
+                Process p = new Process();
+                p.StartInfo.FileName = @"App\Firefox64\firefox.exe";
+                p.StartInfo.Arguments = @"/K -profile " + m_strFolderNameExtract;
+                p.Start();
+            }
+            else
+            {
+                Process p = new Process();
+                p.StartInfo.FileName = @"App\Firefox\firefox.exe";
+                p.StartInfo.Arguments = @"/K -profile " + m_strFolderNameExtract;
+                p.Start();
+            }
             timerHide.Start();
         }
 
