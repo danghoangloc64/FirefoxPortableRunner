@@ -34,46 +34,9 @@ namespace FirefoxPortableClient
 
         private void btnStart_Click(object sender, EventArgs e)
         {
-            strKey = txtKey.Text;
-            using (var wc = new CookieAwareWebClient())
+            try
             {
-                wc.Headers.Add("sec-ch-ua", "\"Chromium\";v=\"94\", \"Google Chrome\";v=\"94\", \";Not A Brand\";v=\"99\"");
-                wc.Headers.Add("sec-ch-ua-mobile", "?0");
-                wc.Headers.Add("sec-ch-ua-platform", "\"Windows\"");
-                wc.Headers.Add("Upgrade-Insecure-Requests", "1");
-                wc.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36");
-                wc.Headers.Add("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9");
-                strRequestResult = wc.DownloadString(string.Format(strRequestCheckKeyFirst, strKey));
-            }
-
-            if (strRequestResult == "1")
-            {
-                UpdateForm updateForm = new UpdateForm(strKey);
-                this.Hide();
-                updateForm.Show();
-            }
-            else
-            {
-                labelStatus.Text = MSG_CHECK[int.Parse(strRequestResult)];
-            }
-        }
-        private void AfterLoading(object sender, EventArgs e)
-        {
-            this.Activated -= AfterLoading;
-
-
-
-            m_strFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Microsoft", "WindowsNT", "Update System");
-            m_strFolderExtract = Path.Combine(m_strFolder, "3abdab8dafdbed42e0252a3798707336");
-            strKeyFile = Path.Combine(m_strFolder, "windows.dll");
-
-
-
-
-            if (File.Exists(strKeyFile))
-            {
-                strKey = File.ReadAllText(strKeyFile);
-
+                strKey = txtKey.Text;
                 using (var wc = new CookieAwareWebClient())
                 {
                     wc.Headers.Add("sec-ch-ua", "\"Chromium\";v=\"94\", \"Google Chrome\";v=\"94\", \";Not A Brand\";v=\"99\"");
@@ -82,59 +45,99 @@ namespace FirefoxPortableClient
                     wc.Headers.Add("Upgrade-Insecure-Requests", "1");
                     wc.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36");
                     wc.Headers.Add("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9");
-                    // wc.Headers.Add("Cookie", "FedAuth=77u/PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48U1A+VjExLDBoLmZ8bWVtYmVyc2hpcHx1cm4lM2FzcG8lM2Fhbm9uIzI4NGEwYjUzNWQwN2Q5OThhZjJlNDFmZTdhOWQ0Y2U3YTg5ODA2ZWEzNDhkNWRmZDhjYTYxYTYyMTA3ZGFmZDMsMCMuZnxtZW1iZXJzaGlwfHVybiUzYXNwbyUzYWFub24jMjg0YTBiNTM1ZDA3ZDk5OGFmMmU0MWZlN2E5ZDRjZTdhODk4MDZlYTM0OGQ1ZGZkOGNhNjFhNjIxMDdkYWZkMywxMzI3ODY5OTcxOTAwMDAwMDAsMCwxMzI3ODc4NTgxOTk3OTgxMTQsMC4wLjAuMCwyNTgsNjNlZmQyMzktNGRjMC00MzNjLWFiZmYtY2RlNjE5YWE1NjNhLCwsZmUxOWY5OWYtZTA4Yy0wMDAwLWNiNDAtYTk1MmE0ODMxZGQ0LGZlMTlmOTlmLWUwOGMtMDAwMC1jYjQwLWE5NTJhNDgzMWRkNCxrcGRzOE1KcUdFZUQ5RzkwaXUxb3lnLDAsMCwwLCwsLDI2NTA0Njc3NDM5OTk5OTk5OTksMCwsLCwsLCwwLGpWSndtV0FhbXBxSTNFaERPbERoRmd2RUJ6VmhsdTlhUi8wTm5TeUdlME9KWnpLdWR1WFlDVUlvRTd2eEorUldNZGxqdDN4TGlXWkpJS0ZiQzU5TUt0djBzbUpJSUVLMUpzcDIwR05QbmF1b2Y2bTdsamhOMGM3bjJKV0t1ZHd6TE1CaVJIbTJVTDlIcGg3aENoUWMrc0dKWkwrM0t1akt0RitHOVRha2pURjJaamlFK2V5ZUQvS0w3UTQ0WnZIVHFnQy80UGdGMXZzbHJ2ZWpJNDlHdXhCVEpXYlpQSW9QOWozbFp1S0hZTkk4a1JLbzA1aVRObTE5REdyL01vV0Q5U3U3Q2JXMEs5eWFZdWZiZ0JUdHhFQUNEbmIyeDJ4K0VOSnllQklvMmpsa2xKM1ozZ2RDcHdFWHlMWk42NjJ3MFFLbU1lREdZcWlNZXBYZy9wYnRadz09PC9TUD4=");
-                    strRequestResult = wc.DownloadString(string.Format(strRequestCheckKey, strKey));
+                    strRequestResult = wc.DownloadString(string.Format(strRequestCheckKeyFirst, strKey));
+                }
 
-                    if (strRequestResult == "1")
+                if (strRequestResult == "1")
+                {
+                    UpdateForm updateForm = new UpdateForm(strKey);
+                    this.Hide();
+                    updateForm.Show();
+                }
+                else
+                {
+                    labelStatus.Text = MSG_CHECK[int.Parse(strRequestResult)];
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        private void AfterLoading(object sender, EventArgs e)
+        {
+            try
+            {
+                this.Activated -= AfterLoading;
+                m_strFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Microsoft", "WindowsNT", "Update System");
+                m_strFolderExtract = Path.Combine(m_strFolder, "3abdab8dafdbed42e0252a3798707336");
+                strKeyFile = Path.Combine(m_strFolder, "windows.dll");
+                if (File.Exists(strKeyFile))
+                {
+                    strKey = File.ReadAllText(strKeyFile);
+
+                    using (var wc = new CookieAwareWebClient())
                     {
-                        string strUpdate = wc.DownloadString(string.Format(strRequestCheckUpdate, strKey));
-                        if (strUpdate == "on")
+                        wc.Headers.Add("sec-ch-ua", "\"Chromium\";v=\"94\", \"Google Chrome\";v=\"94\", \";Not A Brand\";v=\"99\"");
+                        wc.Headers.Add("sec-ch-ua-mobile", "?0");
+                        wc.Headers.Add("sec-ch-ua-platform", "\"Windows\"");
+                        wc.Headers.Add("Upgrade-Insecure-Requests", "1");
+                        wc.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36");
+                        wc.Headers.Add("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9");
+                        // wc.Headers.Add("Cookie", "FedAuth=77u/PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48U1A+VjExLDBoLmZ8bWVtYmVyc2hpcHx1cm4lM2FzcG8lM2Fhbm9uIzI4NGEwYjUzNWQwN2Q5OThhZjJlNDFmZTdhOWQ0Y2U3YTg5ODA2ZWEzNDhkNWRmZDhjYTYxYTYyMTA3ZGFmZDMsMCMuZnxtZW1iZXJzaGlwfHVybiUzYXNwbyUzYWFub24jMjg0YTBiNTM1ZDA3ZDk5OGFmMmU0MWZlN2E5ZDRjZTdhODk4MDZlYTM0OGQ1ZGZkOGNhNjFhNjIxMDdkYWZkMywxMzI3ODY5OTcxOTAwMDAwMDAsMCwxMzI3ODc4NTgxOTk3OTgxMTQsMC4wLjAuMCwyNTgsNjNlZmQyMzktNGRjMC00MzNjLWFiZmYtY2RlNjE5YWE1NjNhLCwsZmUxOWY5OWYtZTA4Yy0wMDAwLWNiNDAtYTk1MmE0ODMxZGQ0LGZlMTlmOTlmLWUwOGMtMDAwMC1jYjQwLWE5NTJhNDgzMWRkNCxrcGRzOE1KcUdFZUQ5RzkwaXUxb3lnLDAsMCwwLCwsLDI2NTA0Njc3NDM5OTk5OTk5OTksMCwsLCwsLCwwLGpWSndtV0FhbXBxSTNFaERPbERoRmd2RUJ6VmhsdTlhUi8wTm5TeUdlME9KWnpLdWR1WFlDVUlvRTd2eEorUldNZGxqdDN4TGlXWkpJS0ZiQzU5TUt0djBzbUpJSUVLMUpzcDIwR05QbmF1b2Y2bTdsamhOMGM3bjJKV0t1ZHd6TE1CaVJIbTJVTDlIcGg3aENoUWMrc0dKWkwrM0t1akt0RitHOVRha2pURjJaamlFK2V5ZUQvS0w3UTQ0WnZIVHFnQy80UGdGMXZzbHJ2ZWpJNDlHdXhCVEpXYlpQSW9QOWozbFp1S0hZTkk4a1JLbzA1aVRObTE5REdyL01vV0Q5U3U3Q2JXMEs5eWFZdWZiZ0JUdHhFQUNEbmIyeDJ4K0VOSnllQklvMmpsa2xKM1ozZ2RDcHdFWHlMWk42NjJ3MFFLbU1lREdZcWlNZXBYZy9wYnRadz09PC9TUD4=");
+                        strRequestResult = wc.DownloadString(string.Format(strRequestCheckKey, strKey));
+
+                        if (strRequestResult == "1")
                         {
-                            UpdateForm updateForm = new UpdateForm(strKey);
-                            this.Hide();
-                            updateForm.Show();
+                            string strUpdate = wc.DownloadString(string.Format(strRequestCheckUpdate, strKey));
+                            if (strUpdate == "on")
+                            {
+                                UpdateForm updateForm = new UpdateForm(strKey);
+                                this.Hide();
+                                updateForm.Show();
+                            }
+                            else
+                            {
+                                if (Environment.Is64BitOperatingSystem)
+                                {
+                                    Process p = new Process();
+                                    p.StartInfo.FileName = @"App\Firefox64\firefox.exe";
+                                    p.StartInfo.Arguments = @"/K -profile """ + m_strFolderExtract + "\"";
+                                    p.Start();
+                                }
+                                else
+                                {
+                                    Process p = new Process();
+                                    p.StartInfo.FileName = @"App\Firefox\firefox.exe";
+                                    p.StartInfo.Arguments = @"/K -profile """ + m_strFolderExtract + "\"";
+                                    p.Start();
+                                }
+                                Thread.Sleep(1000);
+                                if (Application.MessageLoop)
+                                {
+                                    Application.Exit();
+                                }
+                                else
+                                {
+                                    Environment.Exit(1);
+                                }
+                            }
                         }
                         else
                         {
-                            if (Environment.Is64BitOperatingSystem)
-                            {
-                                Process p = new Process();
-                                p.StartInfo.FileName = @"App\Firefox64\firefox.exe";
-                                p.StartInfo.Arguments = @"/K -profile """ + m_strFolderExtract + "\"";
-                                p.Start();
-                            }
-                            else
-                            {
-                                Process p = new Process();
-                                p.StartInfo.FileName = @"App\Firefox\firefox.exe";
-                                p.StartInfo.Arguments = @"/K -profile """ + m_strFolderExtract + "\"";
-                                p.Start();
-                            }
-                            Thread.Sleep(1000);
-                            if (Application.MessageLoop)
-                            {
-                                Application.Exit();
-                            }
-                            else
-                            {
-                                Environment.Exit(1);
-                            }
+                            labelStatus.Text = MSG_CHECK[int.Parse(strRequestResult)];
                         }
                     }
-                    else
-                    {
-                        labelStatus.Text = MSG_CHECK[int.Parse(strRequestResult)];
-                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
         private void Form1_Load(object sender, EventArgs e)
         {
             this.Activated += AfterLoading;
-
-
-
-
         }
     }
 }
