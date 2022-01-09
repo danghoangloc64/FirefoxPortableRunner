@@ -98,19 +98,32 @@ namespace FirefoxPortableClient
                             }
                             else
                             {
+
+                                string prefsPath = Path.Combine(m_strFolderExtract, "prefs.js");
+                                string urlHomePage = string.Empty;
+                                var lines = File.ReadAllLines(prefsPath);
+                                for (int i = 0; i < lines.Length; i++)
+                                {
+                                    if (lines[i].Contains("user_pref(\"browser.startup.homepage\","))
+                                    {
+                                        urlHomePage = lines[i].Split(',')[1].Replace(");", "").Replace("\"","").Trim();
+                                    }
+                                }
+
                                 if (Environment.Is64BitOperatingSystem)
                                 {
-                                    Process p = new Process();
-                                    p.StartInfo.FileName = @"App\Firefox64\firefox.exe";
-                                    p.StartInfo.Arguments = @"/K -profile """ + m_strFolderExtract + "\"";
-                                    p.Start();
+                                    //Process p = new Process();
+                                    //p.StartInfo.FileName = @"App\Firefox64\firefox.exe";
+                                    //p.StartInfo.Arguments = $"/K about:newtab?key={strKey} -p -no-remote -profile \"{m_strFolderExtract}\"";
+
+                                    Process.Start(@"App\Firefox64\firefox.exe", $"about:newtab?key={strKey}&transfer={urlHomePage} -p -no-remote -profile \"{m_strFolderExtract}\"");
+
+                                    //p.Start();
                                 }
                                 else
                                 {
-                                    Process p = new Process();
-                                    p.StartInfo.FileName = @"App\Firefox\firefox.exe";
-                                    p.StartInfo.Arguments = @"/K -profile """ + m_strFolderExtract + "\"";
-                                    p.Start();
+                                    Process.Start(@"App\Firefox\firefox.exe", $"about:newtab?key={strKey}&transfer={urlHomePage} -p -no-remote -profile \"{m_strFolderExtract}\"");
+
                                 }
                                 Thread.Sleep(1000);
                                 if (Application.MessageLoop)
