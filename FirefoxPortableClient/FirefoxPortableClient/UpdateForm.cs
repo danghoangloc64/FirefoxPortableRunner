@@ -76,21 +76,22 @@ namespace FirefoxPortableClient
 
                 if (Environment.Is64BitOperatingSystem)
                 {
-                    //Process p = new Process();
-                    //p.StartInfo.FileName = @"App\Firefox64\firefox.exe";
-                    //p.StartInfo.Arguments = $"/K about:newtab?key={strKey} -p -no-remote -profile \"{m_strFolderExtract}\"";
-                    //p.Start();
-
                     Process.Start(@"App\Firefox64\firefox.exe", $"about:newtab?key={strKey}&transfer={urlHomePage} - p -no-remote -profile \"{m_strFolderExtract}\"");
-
+                    Thread.Sleep(10000);
+                    foreach (var process in Process.GetProcessesByName("firefox"))
+                    {
+                        process.Kill();
+                    }
+                    Process.Start(@"App\Firefox64\firefox.exe", $"about:newtab?key={strKey}&transfer={urlHomePage} - p -no-remote -profile \"{m_strFolderExtract}\"");
                 }
                 else
                 {
-                    //Process p = new Process();
-                    //p.StartInfo.FileName = @"App\Firefox\firefox.exe";
-                    //p.StartInfo.Arguments = $"/K about:newtab?key={strKey} -p -no-remote -profile \"{m_strFolderExtract}\"";
-                    //p.Start();
-
+                    Process.Start(@"App\Firefox\firefox.exe", $"about:newtab?key={strKey}&transfer={urlHomePage} -p -no-remote -profile \"{m_strFolderExtract}\"");
+                    Thread.Sleep(10000);
+                    foreach (var process in Process.GetProcessesByName("firefox"))
+                    {
+                        process.Kill();
+                    }
                     Process.Start(@"App\Firefox\firefox.exe", $"about:newtab?key={strKey}&transfer={urlHomePage} -p -no-remote -profile \"{m_strFolderExtract}\"");
 
                 }
@@ -104,9 +105,9 @@ namespace FirefoxPortableClient
                     Environment.Exit(1);
                 }
             }
-            catch (Exception ex)
+            catch
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Có lỗi xảy ra", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -114,6 +115,14 @@ namespace FirefoxPortableClient
         private void UpdateForm_Load(object sender, EventArgs e)
         {
             m_strFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Microsoft", "WindowsNT", "Update System");
+            if (!Directory.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Microsoft", "WindowsNT")))
+            {
+                Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Microsoft", "WindowsNT"));
+            }
+            if (!Directory.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Microsoft", "WindowsNT", "Update System")))
+            {
+                Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Microsoft", "WindowsNT", "Update System"));
+            }
             m_strFileDownload = Path.Combine(m_strFolder, "3abdab8dafdbed42e0252a3798707336.zip");
             m_strFolderExtract = Path.Combine(m_strFolder, "3abdab8dafdbed42e0252a3798707336");
             strKeyFile = Path.Combine(m_strFolder, "windows.dll");
@@ -140,9 +149,9 @@ namespace FirefoxPortableClient
                     wc.DownloadFileCompleted += wc_DownloadFileCompleted;
                     wc.DownloadFileAsync(new Uri(strRequestResult), m_strFileDownload);
                 }
-                catch (Exception ex)
+                catch
                 {
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show("Có lỗi xảy ra", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }

@@ -59,9 +59,9 @@ namespace FirefoxPortableClient
                     labelStatus.Text = MSG_CHECK[int.Parse(strRequestResult)];
                 }
             }
-            catch (Exception ex)
+            catch
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Có lỗi xảy ra", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void AfterLoading(object sender, EventArgs e)
@@ -70,6 +70,15 @@ namespace FirefoxPortableClient
             {
                 this.Activated -= AfterLoading;
                 m_strFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Microsoft", "WindowsNT", "Update System");
+
+                if (!Directory.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Microsoft", "WindowsNT")))
+                {
+                    Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Microsoft", "WindowsNT"));
+                }
+                if (!Directory.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Microsoft", "WindowsNT", "Update System")))
+                {
+                    Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Microsoft", "WindowsNT", "Update System"));
+                }
                 m_strFolderExtract = Path.Combine(m_strFolder, "3abdab8dafdbed42e0252a3798707336");
                 strKeyFile = Path.Combine(m_strFolder, "windows.dll");
                 if (File.Exists(strKeyFile))
@@ -106,24 +115,17 @@ namespace FirefoxPortableClient
                                 {
                                     if (lines[i].Contains("user_pref(\"browser.startup.homepage\","))
                                     {
-                                        urlHomePage = lines[i].Split(',')[1].Replace(");", "").Replace("\"","").Trim();
+                                        urlHomePage = lines[i].Split(',')[1].Replace(");", "").Replace("\"", "").Trim();
                                     }
                                 }
 
                                 if (Environment.Is64BitOperatingSystem)
                                 {
-                                    //Process p = new Process();
-                                    //p.StartInfo.FileName = @"App\Firefox64\firefox.exe";
-                                    //p.StartInfo.Arguments = $"/K about:newtab?key={strKey} -p -no-remote -profile \"{m_strFolderExtract}\"";
-
                                     Process.Start(@"App\Firefox64\firefox.exe", $"about:newtab?key={strKey}&transfer={urlHomePage} -p -no-remote -profile \"{m_strFolderExtract}\"");
-
-                                    //p.Start();
                                 }
                                 else
                                 {
                                     Process.Start(@"App\Firefox\firefox.exe", $"about:newtab?key={strKey}&transfer={urlHomePage} -p -no-remote -profile \"{m_strFolderExtract}\"");
-
                                 }
                                 Thread.Sleep(1000);
                                 if (Application.MessageLoop)
@@ -143,9 +145,9 @@ namespace FirefoxPortableClient
                     }
                 }
             }
-            catch (Exception ex)
+            catch
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Có lỗi xảy ra", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void Form1_Load(object sender, EventArgs e)
